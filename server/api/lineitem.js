@@ -3,14 +3,13 @@ module.exports = router
 const models = require('../db/models')
 
 router.get('/', (req, res, next) =>
-{   models.Type.findAll()
+{   models.Lineitem.findAll()
         .then(result => res.json(result))
         .catch(next)
 })
 
-router.get('/:id', (req, res, next) => 
-{   models.Type.findOne({where: { id: req.params.id}})
+router.get('/:userId', (req, res, next) =>
+{   models.Lineitem.findAll({where: { userId: req.params.userId}})
         .then(result => res.json(result))
         .catch(next)
 })
-

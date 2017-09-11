@@ -9,21 +9,39 @@ router.get('/', (req, res, next) =>
 })
 
 router.get('/:id', (req, res, next) => 
-{   models.Products.findAll({where: {categoryId: rep.params.id}})
+{   models.Products.findOne({where: {id: rep.params.id}})
         .then(result => res.json(result))
         .catch(next)
 })
 
-router.get('/singleProduct/:productId', (req, res, next) =>
-{    models.Products.findOne({where: { id: req.params.productId }})
+
+router.post('/', (req, res, next) =>
+{   models.Products.create(req.body)
         .then(result => res.json(result))
         .catch(next)
 
 })
 
-router.delete('/singleProduct/:gameId', (req, res, next) => 
-{   models.Products.destroy({where: {categoryId: req.params.categoryId, id: req.params.gameId}})
+router.post('/', (req, res, next) =>
+{   models.Products.create(req.body)
         .then(result => res.json(result))
         .catch(next)
+
 })
+
+router.put('/:id', (req, res, next) =>
+{   models.Products.findOne({where: {id: req.params.id}})
+        .then(result => result.update({name: req.body.name, 
+                                       description: req.body.description,
+                                       image: req.body.image,
+                                       genreId: req.body.genreId}, 
+                                       {returning: true}))
+        .then(updatedProd => res.json(updatedProd[1]))
+})
+
+
+// router.put('/:gameId', (req, res, next) => 
+// {   models.Products.findOne({where: {id: req.params.gameId}})
+//         .then(product => product.update({quantity}))
+// })
 

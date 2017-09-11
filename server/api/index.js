@@ -5,7 +5,11 @@ router.use('/users', require('./users'))
 
 router.use('/products', require('./products'))
 
-router.use('/type', require('./type'))
+router.use('/lineitem', require('./lineitem'))
+
+router.use('/genre', require('./genre'))
+
+
 
 router.use((req, res, next) => {
   const error = new Error('Not Found')
