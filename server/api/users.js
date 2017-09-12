@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {User} = require('../db/models')
+const {User, LineItem} = require('../db/models')
 module.exports = router
 
 router.get('/', (req, res, next) => {
@@ -11,4 +11,8 @@ router.get('/', (req, res, next) => {
   })
     .then(users => res.json(users))
     .catch(next)
+})
+
+router.get('/:userId', (req, res, next) => {
+  models.User.findOne({where: {UserId: req.params.userId}})
 })
