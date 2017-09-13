@@ -7,12 +7,22 @@ var Promise = require('bluebird');
 var db = require('./server/db');
 
 var User = require('./server/db/models').User
+var Product = require('./server/db/models').Product
+var Genre = require('./server/db/models').Genre
+
 // const User, Genre, Product, Review, LineItem } = require('./server/db/models/index.js');
+
+
+// Genre.create({name: 'Action'})
+// Genre.create({name: 'Adventure'})
+// Genre.create({name: 'Role Playing'})
+// Genre.create({name: 'Simulation'})
+// Genre.create({name: 'Strategy'})
 
 console.log('userrrrrr', User)
 var numUsers = 20;
-var numProducts = 400;
-var numReviews = 200;
+var numProducts = 100; 
+var numReviews = 50;
 
 
 var emails = chance.unique(chance.email, numUsers);
@@ -41,8 +51,19 @@ function randUser () {
     image: randPhoto(gender),
     email: emails.pop(),
     password: chance.word(),
-    isAdmin: chance.weighted([true, false], [5, 95])
+    introduction: 'Bresaola brisket frankfurter alcatra pork chop doner jowl. Chicken pork andouille ham, pork chop shoulder pancetta. Turducken alcatra venison chicken ground round burgdoggen. Short ribs picanha shoulder andouille sirloin filet mignon. Meatball hamburger sirloin shankle, brisket tail porchetta ham salami beef.'
+
   });
+}
+
+function randProduct () {
+    return Product.build({
+        name: chance.domain().split('.')[0],
+        image: toonAvatar.generate_avatar(),
+        description: 'Bacon ipsum dolor amet drumstick pastrami shankle meatball fatback pig capicola corned beef t-bone tri-tip. Cow corned beef landjaeger hamburger chuck tongue frankfurter, picanha short loin chicken pork chop shoulder venison fatback bacon. Burgdoggen beef ribs frankfurter short loin, meatball filet mignon swine biltong. Shoulder short loin sirloin turducken ham hock frankfurter doner pork chop. Corned beef turkey andouille tri-tip. Biltong filet mignon brisket tenderloin, pork loin pancetta cow beef cupim frankfurter turkey. Shankle strip steak rump pig.',
+        price: chance.floating({fixed: 2, min: 20.99, max: 99.99}),
+        genreId: 1
+    })
 }
 
 function randTitle () {
@@ -57,7 +78,7 @@ function randTitle () {
   .slice(0, -1);
 }
 
-// function randIntro (createdUsers) {
+// function randStory (createdUsers) {
 //   var user = chance.pick(createdUsers);
 //   var numPars = chance.natural({
 //     min: 3,
@@ -77,41 +98,72 @@ function generateUsers () {
     image: 'http://learndotresources.s3.amazonaws.com/workshop/55e5c92fe859dc0300619bc8/zeke-astronaut.png',
     email: 'zeke@zeke.zeke',
     password: '123',
-    introduction: ''
+    introduction: 'irfwinf'
   }));
   users.push(User.build({
     name: 'Omri Bernstein',
     image: 'http://learndotresources.s3.amazonaws.com/workshop/55e5c92fe859dc0300619bc8/sloth.jpg',
     email: 'omri@zeke.zeke',
     password: '123',
-    introduction: ''
+    introduction: 'rrkfirf'
   }));
   return users;
 }
+function generateGenres() {
+    var genres = []
+    genres.push(Genre.build({name: 'Action'}))
+    genres.push(Genre.build({name: 'Adventure'}))
+    genres.push(Genre.build({name: 'Role Playing'}))
+    genres.push(Genre.build({name: 'Simulation'}))
+    genres.push(Genre.build({name: 'Strategy'}))
+    return genres;
 
-function generateStories (createdUsers) {
-  return doTimes(numStories, function () {
-    return randStory(createdUsers);
-  });
 }
+
+
+
+function generateProducts() {
+    var products = doTimes(numProducts, randProduct)
+    return products;
+}
+
+// function generateStories (createdUsers) {
+//   return doTimes(numStories, function () {
+//     return randStory(createdUsers);
+//   });
+// }
 
 function createUsers () {
   return Promise.map(generateUsers(), function (user) {
     return user.save();
   });
 }
-
-function createStories (createdUsers) {
-  return Promise.map(generateStories(createdUsers), function (story) {
-    return story.save();
-  });
+function createProducts() {
+    return Promise.map(generateProducts(), function (product) {
+        return product.save();
+    } )
 }
+
+function createGenres() {
+    return Promise.map(generateGenres(), function (genre) {
+        return genre.save();
+    })
+}
+
+// function createStories (createdUsers) {
+//   return Promise.map(generateStories(createdUsers), function (story) {
+//     return story.save();
+//   });
+// }
 
 function seed () {
   return createUsers()
-  .then(function (createdUsers) {
-    return createStories(createdUsers);
-  });
+    .then(() => {
+        return createProducts()
+    })
+    .then(() => {
+        return createGenres()
+    })
 }
 
 console.log('Syncing database');

@@ -6,6 +6,7 @@ import {logout} from '../store'
 import Sidebar from './Sidebar'
 import AllProducts from './AllProducts/main.js'
 import Navbar from './Navbar'
+import AllProducts from './AllProducts'
 
 /**
  * COMPONENT
@@ -58,7 +59,7 @@ Main.propTypes = {
 
 
       // <h1>BOILERMAKER</h1>
-      
+
       // <nav>
       //   {
       //     isLoggedIn

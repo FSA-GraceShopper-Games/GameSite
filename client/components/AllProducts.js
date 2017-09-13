@@ -1,9 +1,9 @@
 import React, { Component  } from 'react';
 // import {  } from '../store';
-// import {connect} from 'react-redux';
+import {connect} from 'react-redux';
 // import {Sidebar} from './Sidebar'
 import {Grid, Row, Col, FormControl, Container} from 'react-bootstrap';
-import SingleProd from './SingleProd.js'
+import SingleProd from './SingleProduct'
 
 const products = [
     {
@@ -56,20 +56,21 @@ const products = [
         avgReview: 5
     }
 ]
-export default class AllProducts extends Component {
+
+class AllProducts extends Component {
 
     constructor(props) {
         super(props)
-        
+
     }
 
     render() {
-        
+
         const style = {
             backgroundColor: '#4EB1BA'
         }
         return (
-            
+
                 <Col xs={12} md={12} style={style}>
                 <h1>
                     Search Results:
@@ -85,3 +86,15 @@ export default class AllProducts extends Component {
         )
     }
 }
+
+const mapStateToProps = state => ({
+
+})
+
+const mapDispatchToProps = dispatch => ({
+
+})
+
+const AllProductsContainer = connect(mapStateToProps, mapDispatchToProps)(AllProducts)
+
+export default AllProductsContainer
