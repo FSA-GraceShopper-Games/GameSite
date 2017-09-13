@@ -8,6 +8,9 @@ import Routes from './routes'
 // establishes socket connection
 import './socket'
 
+// sidebar addition
+import './index.scss'
+
 ReactDOM.render(
   <Provider store={store}>
     <Routes />

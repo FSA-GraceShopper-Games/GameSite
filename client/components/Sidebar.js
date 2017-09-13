@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Link } from 'react-router';
+// import { Link } from 'react-router';
 
 
 
@@ -34,15 +34,16 @@ export default class Sidebar extends Component {
             games,
             showButton: true,
             showSidebar: false,
-            showChildren: false,
-            listKey: 0
+            listChild: false,
+            activeKey: -1
         }
-        // this.showChildren = this.showChildren.bind(this);
     }
 
-    // showChildren(){
-    //     console.log('getting clicked')
-    // }
+    showChild(key, e){
+        // console.log(this.state.games.filter(game => game.id === key))
+
+        this.setState({listChild: !this.state.listChild})
+    }
 
     render(){
         return(
@@ -53,28 +54,30 @@ export default class Sidebar extends Component {
                     {
                         this.state.showButton && 
                         <button className="glyphicon glyphicon-menu-hamburger" 
-                                onMouseEnter={()=> this.setState({showSidebar: true, showButton: false})}
-                                > 
+                                onMouseEnter={()=> this.setState({showSidebar: true, showButton: false})}> 
                         </button>
                     }
                     
                     {
                         this.state.showSidebar && 
                         <nav>
-                        <ul className="nav sidebar-nav">
+                        <ul id="sidebar" className="nav sidebar-nav "
+                            onMouseLeave={()=> this.setState({showSidebar: false, showButton: true})}
+                            >
                             {
                             this.state.games.map(game => {
                                 return (
                                     
-                                    <li className="dropdown" key={game.id} onClick={() =>this.setState({showChildren: !this.state.showChildren})}>
+                                    <li className="dropdown" key={game.id} onClick={this.showChild.bind(this, game.id)}>
                                         <a href="#" className="dropdown-toggle" data-toggle="dropdown" >
                                             {game.name}
                                             <span className="caret"></span>
                                         </a> 
-                                        {this.state.showChildren &&
+                                        {
+                                        this.state.listChild && 
                                         <ul>
-                                        <li><a href="#">Games</a></li>
-                                        <li><a href="#">Accessories</a></li>
+                                            <li><a href="#">Games</a></li>
+                                            <li><a href="#">Accessories</a></li>
                                         </ul>
                                         }
                                     </li>
@@ -105,3 +108,4 @@ export default class Sidebar extends Component {
 
 
             // onMouseLeave={()=> this.setState({showSidebar: false, showButton: true})}
+            // () =>this.setState({showChildren: !this.state.showChildren})
