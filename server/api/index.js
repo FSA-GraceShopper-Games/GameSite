@@ -9,6 +9,7 @@ router.use('/lineitem', require('./lineitem'))
 
 router.use('/genre', require('./genre'))
 
+router.use('/review', require('./review'))
 
 
 router.use((req, res, next) => {

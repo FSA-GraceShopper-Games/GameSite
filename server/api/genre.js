@@ -8,8 +8,3 @@ router.get('/', (req, res, next) =>{
         .catch(next)
 })
 
-router.get('/:id', (req, res, next) =>{
-    models.Products.findAll({where: { genreId: req.params.id }})
-        .then(result => res.json(result))
-        .catch(next)
-})
