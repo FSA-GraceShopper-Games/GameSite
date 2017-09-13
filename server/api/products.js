@@ -14,19 +14,23 @@ router.get('/:id', (req, res, next) =>
         .catch(next)
 })
 
+router.get('/:id', (req, res, next) => 
+{   models.Products.findOne({where: {id: rep.params.id}})
+        .then(result => res.json(result))
+        .catch(next)
+})
+
 
 router.post('/', (req, res, next) =>
 {   models.Products.create(req.body)
         .then(result => res.json(result))
         .catch(next)
-
 })
 
 router.post('/', (req, res, next) =>
 {   models.Products.create(req.body)
         .then(result => res.json(result))
         .catch(next)
-
 })
 
 router.put('/:id', (req, res, next) =>
