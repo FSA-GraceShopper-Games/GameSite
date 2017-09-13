@@ -14,7 +14,7 @@ import './index.scss'
 
 ReactDOM.render(
   <Provider store={store}>
-    <AllProducts />
+    <Routes/>
   </Provider>,
   document.getElementById('app')
 )
