@@ -23,17 +23,17 @@ const Product = db.define('product', {
     }
 })
 
-Product.prototype.avgReview = function() {
-    console.log(this.id)
-    return Review.findAll({
-        where: {
-            productId: this.id
-        }
-    }).then((reviews) => {
-        console.log('first rating', reviews[0].stars)
-       return reviews[0].stars
-    })
-}
+// Product.prototype.avgReview = function() {
+//     console.log(this.id)
+//     return Review.findAll({
+//         where: {
+//             productId: this.id
+//         }
+//     }).then((reviews) => {
+//         console.log('first rating', reviews[0].stars)
+//        return reviews[0].stars
+//     })
+// }
 
 
 

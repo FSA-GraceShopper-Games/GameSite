@@ -32,13 +32,13 @@ User.hasMany(Review)
  * instead of: const User = require('../db/models/user')
  */
 
- Product.findOne({
-   where: {
-     id: 1
-   }
- }).then((product) => {
-  console.log('avgReview', product.avgReview())
- })
+//  Product.findOne({
+//    where: {
+//      id: 1
+//    }
+//  }).then((product) => {
+//   console.log('avgReview', product.avgReview())
+//  })
 
 module.exports = {
   User,
