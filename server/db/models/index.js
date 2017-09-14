@@ -3,9 +3,14 @@ const Product = require('./product');
 const Review = require('./reviews.js')
 const LineItem = require('./lineItem.js')
 const Genre = require('./genre.js')
+const Order = require('./orders.js')
 
 LineItem.belongsTo(Product)
+LineItem.belongsTo(Order)
 
+Order.hasMany(LineItem)
+Order.belongsTo(User)
+User.hasMany(Order)
 User.hasMany(LineItem)
 LineItem.belongsTo(User)
 
