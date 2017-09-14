@@ -1,56 +1,86 @@
-import React, {Component} from 'react'
-import store, {connect} from 'react-redux'
-import {Grid, Row, Col, Image} from 'react-bootstrap'
+import React, { Component  } from 'react';
+import {Grid, Row, Checkbox, Col, FormControl, ControlLabel, FormGroup} from 'react-bootstrap';
+import Form from './Form.js'
 
-const product = {
-    name: "Destiny 2",
-    description: "Some game that probably pretty good but I'll never have the goddamn time to play it but I'm old and have no free time anymore plus destiny sounds like a stripper name",
-    images: [
-        'https://upload.wikimedia.org/wikipedia/en/b/be/Destiny_box_art.png', 
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpvltosrJtpbrl66OQM8SGzEdyUDuOP1IvmV8GjE6UvBuLCuWmnZ-ncgA', 
-        'https://assets.vg247.com/current//2014/01/Destiny-mars-venus-1.jpg',
-        'https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&ved=0ahUKEwixzIPJwKLWAhVLxYMKHZYHAAsQjRwIBw&url=http%3A%2F%2Fteambeyond.net%2F35-new-destiny-screenshots%2F&psig=AFQjCNHHrC-GjlyXX_yJxevzKFcJ7G3P1A&ust=1505403835238276'
-    ]
+function FieldGroup({ id, label, help, ...props }) {
+    return (
+        <FormGroup controlId={id}>
+            <ControlLabel>{label}</ControlLabel>
+            <FormControl {...props} />
+            {help && <HelpBlock>{help}</HelpBlock>}
+        </FormGroup>
+    );
 }
 
+export default class AllProducts extends Component {
 
-function SingleProduct(props){
-    props = product
-    return (
-    <div>
-        <Grid>
-                <Row>
-                    <Col xs={6} md={4}>
-                        {props.name}
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            price: this.props.product.price
+        }
+        this.handleClick = this.handleClick.bind(this)
+
+    }
+
+
+    handleClick(e) {
+        console.log(e.target.checked)
+        const newPrice = (this.props.product.price * 0.7).toFixed(2)
+        if (e.target.checked) {
+            this.setState({price: newPrice})
+        } else {
+            console.log('off')
+            this.setState({price: this.props.product.price})
+        }
+    }
+
+    render() {
+        const style = {
+            backgroundColor: '#222930',
+            color: '#E9E9E9',
+            border: '3px solid #4EB1BA'
+        }
+        const product = this.props.product
+
+        var stars ='';
+        for (var i = 0; i < product.avgReview; i++) {
+            stars+= ' ☆'
+        }
+
+        return (
+            <div>
+            <Grid style={style}>
+                <Row className="show-grid">
+                    <Col xs={12} md={6}>
+                        <h1 style={{display: 'inline', marginRight: '30px'}}>{product.name} </h1>
+                        <h3 style={{display: 'inline', marginRight: '30px'}}>${this.state.price}</h3>
+                        <Checkbox inline onChange={this.handleClick}>
+                            Used
+                        </Checkbox>
+
+
                     </Col>
-                    <Col xs={6} md={4}>
-                        <Image src={props.images[0]} circle />
-                    </Col>
-                    <Col xs={6} md={4}>
-                        {props.description}
+                    <Col xs={12} md={6}>
+                        <h3 style={{color: 'yellow'}}>Product Rating: {stars}</h3>
                     </Col>
                 </Row>
-                <Row>
-                    <Col xs={6} md={4}>
-                        <Image src={props.images[1]} rounded />
+                <Row className="show-grid">
+                    <Col xs={12} md={4}>
+                        <img src={product.image}/>
                     </Col>
-                    <Col xs={6} md={4}>
-                        <Image src={props.images[2]} circle />
+                    <Col xs={12} md={2}>
+                        <a href='' color='black'>Buy Now</a>
                     </Col>
-                    <Col xs={6} md={4}>
-                        <Image src={props.images[3]} thumbnail />
+                    <Col xs={12} md={6}>
+                        <p>{product.description}</p>
                     </Col>
                 </Row>
             </Grid>
-        </div>
-            )
+            <br/>
+            </div>
+
+        )
+    }
 }
-
-
-// const mapStateToProps = function(state){
-//     return {product: state.product};
-//  }
-
-// export default connect(mapStateToProps)(SingleProduct);
-
-export default SingleProduct

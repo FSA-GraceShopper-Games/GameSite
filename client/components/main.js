@@ -5,9 +5,8 @@ import {withRouter, Link} from 'react-router-dom'
 import {logout} from '../store'
 import Sidebar from './Sidebar'
 import SingleProduct from './SingleProduct'
-
 import Navbar from './Navbar'
-
+import AllProducts from './AllProducts'
 /**
  * COMPONENT
  *  The Main component is our 'picture frame' - it displays the navbar and anything
@@ -58,7 +57,7 @@ Main.propTypes = {
 
 
       // <h1>BOILERMAKER</h1>
-      
+
       // <nav>
       //   {
       //     isLoggedIn
