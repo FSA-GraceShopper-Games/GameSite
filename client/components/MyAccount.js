@@ -5,7 +5,7 @@ import React, { Component  } from 'react';
 import {Grid, Row, Col, FormControl, Container} from 'react-bootstrap';
 import {connect} from 'react-redux'
 import { fetchOrdersForUser } from '../store'
-
+import Cart from './Cart'
 
  class MyAccount extends Component {
 
@@ -63,15 +63,7 @@ import { fetchOrdersForUser } from '../store'
     }
     renderCart() {
         return (
-            <Row className="show-grid">
-            <Col xs={12} md={4}>
-                <h1>THIS IS YOUR cart  BROOOOOOO!!!!</h1>
-            </Col>
-            <Col xs={12} md={2}>
-            </Col>
-            <Col xs={12} md={6}>
-            </Col>
-            </Row>
+            <Cart/>
         )
     }
     renderSomething() {
@@ -168,14 +160,16 @@ import { fetchOrdersForUser } from '../store'
     
 
     render() {
-        console.log(this.props)
 
         const style = {
             backgroundColor: '#4EB1BA'
         }
+        const style2 = {
+            backgroundColor: 'black'
+        }
         const orders = this.props.orders
         return (
-            <div>
+            <div style={style2}>
 
             <Grid style={style}>
                 <Row className="show-grid">
