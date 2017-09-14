@@ -158,12 +158,13 @@ function createGenres() {
 
 function seed () {
   return createUsers()
+  .then(() => {
+    return createGenres()
+  })
     .then(() => {
-        return createProducts()
+      return createProducts()
     })
-    .then(() => {
-        return createGenres()
-    })
+
 }
 
 console.log('Syncing database');
