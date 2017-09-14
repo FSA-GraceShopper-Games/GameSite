@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {User, LineItem} = require('../db/models')
+const models = require('../db/models')
 module.exports = router
 
 router.get('/', (req, res, next) => {
@@ -15,4 +15,22 @@ router.get('/', (req, res, next) => {
 
 router.get('/:userId', (req, res, next) => {
   models.User.findOne({where: {UserId: req.params.userId}})
+})
+
+router.post('/', (req, res, next) =>
+{   models.User.create(req.body)
+        .then(result => res.json(result))
+        .catch(next)
+})
+
+router.put('/:id', (req, res, next) =>
+{   models.User.findOne({where: {id: req.params.id}})
+        .then(result => result.update(req.body, {returning: true}))
+        .then(updatedUser => res.json(updatedUser[1]))
+})
+
+router.delete('/:id', (req,res,next) =>
+{   models.User.findOne({where: {id : req.params.id}})
+        .then(result => result.destroy())
+        .then(res.json('success!!!!'))
 })

@@ -3,9 +3,9 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {withRouter, Link} from 'react-router-dom'
 import {logout} from '../store'
+import Sidebar from './Sidebar'
 import Navbar from './Navbar'
 import AllProducts from './AllProducts'
-import Sidebar from './Sidebar'
 
 /**
  * COMPONENT
@@ -20,8 +20,6 @@ const Main = (props) => {
     <div>
       <Navbar />
       <Sidebar />
-      <AllProducts />
-      {children}
     </div>
   )
 }
