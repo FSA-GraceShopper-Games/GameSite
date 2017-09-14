@@ -3,7 +3,7 @@ import React, { Component  } from 'react';
 import {connect} from 'react-redux';
 // import {Sidebar} from './Sidebar'
 import {Grid, Row, Col, FormControl, Container} from 'react-bootstrap';
-import SingleProd from './SingleProduct'
+import SingleProduct from './SingleProduct'
 
 const products = [
     {
@@ -78,7 +78,7 @@ class AllProducts extends Component {
                 {
                     products.map((product) => {
                         return (
-                            <SingleProd product={product}/>
+                            <SingleProduct product={product}/>
                         )
                     })
                 }
