@@ -3,28 +3,16 @@ import React, { Component  } from 'react';
 // import {connect} from 'react-redux';
 // import {Sidebar} from './Sidebar'
 import {Grid, Row, Col, FormControl, Container} from 'react-bootstrap';
+import {connect} from 'react-redux'
+import { fetchOrdersForUser } from '../store'
 
 
-
-const orders = [
-    {   
-        data: '01/01/01',
-        productId: 1,
-        userId: 1,
-
-    }
-]
-
-
-export default class MyAccount extends Component {
+ class MyAccount extends Component {
 
     constructor(props) {
         super(props)
-
         this.state = {
-            showThis: '',
-            orders: orders
-    
+            showThis: ''    
         }
         this.handleClickOrder =  this.handleClickOrder.bind(this)
         this.renderOrderHistory =  this.renderOrderHistory.bind(this)
@@ -43,18 +31,32 @@ export default class MyAccount extends Component {
 
 
     componentDidMount() {
+        this.props.fetchOrders(3)
     }
 
     
     renderOrderHistory() {
+        function renderSingleOrder(order) {
+            return (<div style={{borderTop: '5px solid blue'}}key={order.id}>
+                <h3>Order progress: {order.progress}</h3>
+                <h3>Date you ordered: {order.date.slice(0,10)}</h3>
+                <h3>These are the products you ordered: </h3>
+                {
+                    order.lineItems.map((lineItem) => {
+                        return <h6 style={{display: 'inLine'}}key={lineItem.id}>{lineItem.product.name} ${lineItem.product.price}, </h6>
+                    })
+                }
+                <h3>Total Orders: {order.lineItems.length}  Total Price: {order.totalPrice}</h3>
+
+            </div>)
+        }
         return (
             <Row className="show-grid">
-            <Col xs={12} md={4}>
-                <h1>THIS IS YOUR ORDER HISTORY BROOOOOOO!!!!</h1>
-            </Col>
-            <Col xs={12} md={2}>
-            </Col>
-            <Col xs={12} md={6}>
+            <Col xs={12} md={12}>
+                <h1>Your orders</h1>
+                {this.props.orders.map((order) => {
+                    return renderSingleOrder(order)
+                }) }
             </Col>
             </Row>
         )
@@ -125,7 +127,6 @@ export default class MyAccount extends Component {
         )
     }
     handleClickOrder(e) {
-        console.log(e.target.innerh5)
         this.setState({showThis: 'orderHistory'})
     }
     handleClickEdit() {
@@ -167,10 +168,12 @@ export default class MyAccount extends Component {
     
 
     render() {
+        console.log(this.props)
 
         const style = {
             backgroundColor: '#4EB1BA'
         }
+        const orders = this.props.orders
         return (
             <div>
 
@@ -183,7 +186,7 @@ export default class MyAccount extends Component {
                 <Row className="show-grid">
                     <Col style={{borderRight: '3px solid black'}} xs={12} md={2}>
                         <div style={{backgroundColor: "green"}}onClick={this.handleClickOrder}>
-                        <h5 name='innerh5'> Oerder History</h5>
+                        <h5 name='innerh5'> Order History</h5>
                         </div>
                     </Col>
                     <Col style={{borderRight: '3px solid black'}} xs={12} md={2}>
@@ -226,14 +229,18 @@ export default class MyAccount extends Component {
     }
 }
 
-// const mapStateToProps = state => ({
+const mapState = state => ({
+    orders: state.order
+})
 
-// })
+const mapDispatch = dispatch => ({
+    fetchOrders(userId) {
+        dispatch(fetchOrdersForUser(userId))
+    }
+})
 
-// const mapDispatchToProps = dispatch => ({
+const MyAccountContainer = connect(mapState, mapDispatch)(MyAccount)
 
-// })
+export default MyAccountContainer
 
-// const MyAccountContainer = connect(mapStateToProps, mapDispatchToProps)(MyAccount)
 
-// export default MyAccountContainer
