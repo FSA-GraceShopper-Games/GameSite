@@ -57,7 +57,7 @@ const products = [
     }
 ]
 
-class AllProducts extends Component {
+export default class AllProducts extends Component {
 
     constructor(props) {
         super(props)
@@ -87,14 +87,14 @@ class AllProducts extends Component {
     }
 }
 
-const mapStateToProps = state => ({
+// const mapStateToProps = state => ({
 
-})
+// })
 
-const mapDispatchToProps = dispatch => ({
+// const mapDispatchToProps = dispatch => ({
 
-})
+// })
 
-const AllProductsContainer = connect(mapStateToProps, mapDispatchToProps)(AllProducts)
+// const AllProductsContainer = connect(mapStateToProps, mapDispatchToProps)(AllProducts)
 
-export default AllProductsContainer
+// export default AllProductsContainer
