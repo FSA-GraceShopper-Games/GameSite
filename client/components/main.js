@@ -20,6 +20,8 @@ const Main = (props) => {
     <div>
       <Navbar />
       <Sidebar />
+      <AllProducts />
+      {children}
     </div>
   )
 }
