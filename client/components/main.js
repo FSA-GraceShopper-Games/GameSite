@@ -4,10 +4,9 @@ import {connect} from 'react-redux'
 import {withRouter, Link} from 'react-router-dom'
 import {logout} from '../store'
 import Sidebar from './Sidebar'
-import AllProducts from './AllProducts/main.js'
 import Navbar from './Navbar'
 import AllProducts from './AllProducts'
-
+import MyAccount from './MyAccount'
 /**
  * COMPONENT
  *  The Main component is our 'picture frame' - it displays the navbar and anything
@@ -20,9 +19,8 @@ const Main = (props) => {
   return (
     <div>
       <Navbar />
-
-      <Sidebar />
-      <AllProducts/>
+      <div style={{height: '70px'}}/>
+      <MyAccount/>
     </div>
   )
 }
