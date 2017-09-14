@@ -4,9 +4,16 @@ import {connect} from 'react-redux'
 import {withRouter, Link} from 'react-router-dom'
 import {logout} from '../store'
 import Sidebar from './Sidebar'
+<<<<<<< HEAD
 import SingleProduct from './SingleProduct'
 import Navbar from './Navbar'
 import AllProducts from './AllProducts'
+=======
+import AllProducts from './AllProducts/main.js'
+import Navbar from './Navbar'
+import AllProducts from './AllProducts'
+
+>>>>>>> 9ca2ad6a5460c7b6dbf57b14eb294f64284a4ccd
 /**
  * COMPONENT
  *  The Main component is our 'picture frame' - it displays the navbar and anything
@@ -18,9 +25,16 @@ const Main = (props) => {
 
   return (
     <div>
+<<<<<<< HEAD
     <SingleProduct />
     <Navbar />
     <Sidebar />
+=======
+      <Navbar />
+
+      <Sidebar />
+      <AllProducts/>
+>>>>>>> 9ca2ad6a5460c7b6dbf57b14eb294f64284a4ccd
     </div>
   )
 }

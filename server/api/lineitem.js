@@ -13,3 +13,9 @@ router.get('/:userId', (req, res, next) =>
         .then(result => res.json(result))
         .catch(next)
 })
+
+router.post('/', (req, res, next) => {
+        models.LineItem.create(req.body)
+                .then(result => res.json(result))
+                .catch(next)
+})
