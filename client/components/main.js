@@ -17,10 +17,13 @@ const Main = (props) => {
   const {children, handleClick, isLoggedIn} = props
 
   return (
-    <div>
+    <div id="wrapper" className="container-fluid">
       <Navbar />
-      <Sidebar />
-      <AllProducts />
+  
+         <Sidebar />
+
+        <AllProducts />
+      
     </div>
   )
 }

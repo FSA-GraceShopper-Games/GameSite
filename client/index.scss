@@ -18,7 +18,50 @@ body {
   }
 }
 
-#sidebar{
-  border: 1px solid black;
-  border-radius: 25px;
+
+//*-------SIDEBAR-------*//
+
+
+.sidebar-nav {
+    position: fixed;
+    // float: left;
+    left:0;
+    top: 56px;
+    width: 250px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    border: 1px solid black;
+    background-color: rgb(78, 177, 186);
+}
+
+.sidebar-nav li {
+    text-indent: 20px;
+    line-height: 40px;
+    
+}
+
+.sidebar-nav li a {
+    display: block;
+    text-decoration: none;
+    color: black;
+}
+
+.sidebar-nav li a:hover {
+    text-decoration: none;
+    color: #fff;
+    background: rgba(255,255,255,0.2);
+}
+
+
+.sidebar-nav li ul li {
+  list-style: none;
+}
+
+@media(min-width:768px) {
+    #wrapper {
+        padding-left: 250px;
+    }
+
 }
