@@ -20,6 +20,7 @@ const Main = (props) => {
     <div>
       <Navbar />
       <div style={{height: '70px'}}/>
+
       <MyAccount/>
     </div>
   )
