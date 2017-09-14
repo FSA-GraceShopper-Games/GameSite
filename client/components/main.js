@@ -4,7 +4,6 @@ import {connect} from 'react-redux'
 import {withRouter, Link} from 'react-router-dom'
 import {logout} from '../store'
 import Sidebar from './Sidebar'
-import AllProducts from './AllProducts/main.js'
 import Navbar from './Navbar'
 import AllProducts from './AllProducts'
 
@@ -20,9 +19,7 @@ const Main = (props) => {
   return (
     <div>
       <Navbar />
-
       <Sidebar />
-      <AllProducts/>
     </div>
   )
 }
