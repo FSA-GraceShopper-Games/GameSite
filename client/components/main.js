@@ -19,8 +19,10 @@ const Main = (props) => {
   return (
     <div>
       <Navbar />
-      <div style={{height: '70px'}}/>
-
+      <div id="wrapper" className="container-fluid">
+        <Sidebar />
+        <AllProducts />
+      </div>
       <MyAccount/>
     </div>
   )

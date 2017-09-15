@@ -76,9 +76,9 @@ export default class AllProducts extends Component {
                     Search Results:
                 </h1>
                 {
-                    products.map((product) => {
+                    products.map((product, ind) => {
                         return (
-                            <SingleProd product={product}/>
+                            <SingleProd key={ind} product={product}/>
                         )
                     })
                 }
