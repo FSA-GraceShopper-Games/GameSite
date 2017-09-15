@@ -19,8 +19,8 @@ class SingleProductContainer extends Component {
   }
 
   componentDidMount(){
+    console.log(this.props)
     axios.get(`/${this.props.match.params.id}`)
-      .then(result => res.data(result))
       .then(product => this.setState({product}))
       .catch(console.error)
   }
