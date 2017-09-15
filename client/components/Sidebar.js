@@ -41,7 +41,7 @@ export default class Sidebar extends Component {
 
     render(){
         return(
-            <div id="sidebar-wrapper">
+            <div style={{marginTop: '60px'}} id="sidebar-wrapper">
             <ul className="sidebar-nav">
                 <li>
                     sort by price

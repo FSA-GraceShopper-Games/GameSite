@@ -18,12 +18,12 @@ const Main = (props) => {
 
   return (
     <div>
-      <Navbar />
+      <Navbar style={{backgroundColor: '#E3DEC1'}}/>
       <div id="wrapper" className="container-fluid">
         <Sidebar />
-        <AllProducts />
+        <AllProducts/>
+        <MyAccount />
       </div>
-      <MyAccount/>
     </div>
   )
 }
