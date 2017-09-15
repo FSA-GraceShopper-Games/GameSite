@@ -5,6 +5,8 @@ import {withRouter, Link} from 'react-router-dom'
 import {logout} from '../store'
 import Sidebar from './Sidebar'
 import Navbar from './Navbar'
+import AllProducts from './AllProducts'
+import MyAccount from './MyAccount'
 
 /**
  * COMPONENT
@@ -18,8 +20,12 @@ const Main = (props) => {
   return (
     <div>
       <Navbar />
-      <Sidebar />
-      {children}
+
+      <div id="wrapper" className="container-fluid">
+        <Sidebar />
+        <AllProducts />
+      </div>
+      <MyAccount/>
     </div>
   )
 }
