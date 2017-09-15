@@ -8,6 +8,7 @@ const ADD_PRODUCT_TO_CART = 'ADD_PRODUCT_TO_CART';
 
 // ACTION CREATORS
 export function addProductToCart(product, quantity) {
+  product.quantity = quantity;
   return {
     type: ADD_PRODUCT_TO_CART,
     product

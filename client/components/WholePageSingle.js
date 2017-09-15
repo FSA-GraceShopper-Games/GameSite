@@ -42,7 +42,7 @@ function WholePageSingle(props){
                 </Carousel>
             </Col>
             <Col xs={6} md={4} lg={3}>
-                <Form />
+                <Form handleSubmit={props.handleSubmit}/>
             </Col>
         </div>
     )
