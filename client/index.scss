@@ -26,7 +26,7 @@ body {
     position: fixed;
     // float: left;
     left:0;
-    top: 56px;
+    // top: 56px;
     width: 250px;
     margin: 0;
     padding: 0;
@@ -34,6 +34,7 @@ body {
     text-decoration: none;
     border: 1px solid black;
     background-color: rgb(78, 177, 186);
+    height: 100%;
 }
 
 .sidebar-nav li {
@@ -62,6 +63,7 @@ body {
 @media(min-width:768px) {
     #wrapper {
         padding-left: 250px;
+        background-color: rgb(78, 177, 186);
     }
 
 }
