@@ -19,8 +19,7 @@ class SingleProductContainer extends Component {
   }
 
   componentDidMount(){
-    axios.get(`/${props.match.params.id}`)
-      .then(result => res.json(result))
+    axios.get(`/${this.props.match.params.id}`)
       .then(product => this.setState({product}))
       .catch(console.error)
   }
@@ -34,7 +33,8 @@ class SingleProductContainer extends Component {
   handleSubmit (evt) {
     evt.preventDefault();
     console.log(evt.target.value)
-    const productId = evt.target.value;
+    const product = this.state.product
+    const quantity = evt.target.value
     this.props.addProductToCart(product, quantity);
   }
 
@@ -44,9 +44,7 @@ class SingleProductContainer extends Component {
       <WholePageSingle direction={this.state.carDirection}
                       index={this.state.carIndex}
                       handleCarSelect={this.handleCarSelect}
-                      handleSumbit={this.handleSumbit}
-                      product={this.state.product}
-
+                      handleSubmit={this.handleSubmit}
                       />
     );   
   }
@@ -59,7 +57,7 @@ const mapDispatchToProps = dispatch => ({
   addProductToCart: (product) => dispatch(addProductToCart(product))
 })
   
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AllProducts))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SingleProductContainer))
 
 /* const mapDispatchToProps = dispatch => ({
     someFunc: (someData) => dispatch(someFunc(someData))

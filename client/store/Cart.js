@@ -7,7 +7,7 @@ const ADD_PRODUCT_TO_CART = 'ADD_PRODUCT_TO_CART';
 // const 
 
 // ACTION CREATORS
-export function addProductForUser(product) {
+export function addProductToCart(product, quantity) {
   return {
     type: ADD_PRODUCT_TO_CART,
     product

@@ -1,7 +1,7 @@
 import React, { Component  } from 'react';
 import {withRouter} from 'react-router'
 import {Grid, Row, Checkbox, Col, FormControl, ControlLabel, FormGroup, Carousel} from 'react-bootstrap';
-import Form from './Form.js'
+import Form from './BuyNowForm.js'
 
 const game = {
     name: "Destiny",
