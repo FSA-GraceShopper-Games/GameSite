@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, withRouter } from 'react-router-dom'
+import {connect} from 'react-redux'
+import {logout} from '../store/user'
 
 class Navbar extends Component {
   constructor(props) {
     super(props);
 
     this.renderLoginSignup = this.renderLoginSignup.bind(this);
-    this.renderLogout = this.renderLogout.bind(this);
+    this.renderMyAccountLogout = this.renderMyAccountLogout.bind(this);
   }
 
   renderLoginSignup() {
@@ -22,9 +24,12 @@ class Navbar extends Component {
     );
   }
 
-  renderLogout() {
+  renderMyAccountLogout() {
     return (
-      <ul className="navbar-nav">
+      <ul className="navbar-nav navbar-inline">
+        <li>
+          <NavLink className="btn btn-info margin" to="/myaccount" activeClassName="active" role="button">My Account</NavLink>
+        </li>
         <li>
           <button
             className="btn btn-info"
@@ -33,7 +38,7 @@ class Navbar extends Component {
           </button>
         </li>
       </ul>
-    );
+    )
   }
 
   render() {
@@ -73,11 +78,21 @@ class Navbar extends Component {
             <input className="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" />
             <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
           </form>
-          { this.props.currentUser ? this.renderLogout() : this.renderLoginSignup() }
+          { this.props.user.id ? this.renderMyAccountLogout() : this.renderLoginSignup() }
         </div>
       </nav>
-    );
+    )
   }
 }
 
-export default Navbar
+const mapStateToProps = state => ({ user: state.user })
+
+const mapDispatchToProps = dispatch => ({
+  logout: () => {
+    dispatch(logout())
+  }
+})
+
+const NavbarContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Navbar));
+
+export default NavbarContainer

@@ -5,7 +5,6 @@ import {withRouter, Link} from 'react-router-dom'
 import {logout} from '../store'
 import Sidebar from './Sidebar'
 import Navbar from './Navbar'
-import AllProducts from './AllProducts'
 
 /**
  * COMPONENT
@@ -20,7 +19,6 @@ const Main = (props) => {
     <div>
       <Navbar />
       <Sidebar />
-      <AllProducts />
       {children}
     </div>
   )
