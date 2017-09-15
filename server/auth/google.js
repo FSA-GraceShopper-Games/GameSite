@@ -29,13 +29,16 @@ const strategy = new GoogleStrategy(googleConfig, (token, refreshToken, profile,
   const name = profile.displayName
   const email = profile.emails[0].value
 
-  User.find({where: {googleId}})
-    .then(user => user
-      ? done(null, user)
-      : User.create({name, email, googleId})
-        .then(user => done(null, user))
-    )
-    .catch(done)
+  const info = {name, email, googleId}
+
+  User.findOrCreate({
+    where: {email},
+    defaults: info
+  })
+  .spread((user, created) => {
+    done(null, user)
+  })
+ .catch(done)
 })
 
 passport.use(strategy)
