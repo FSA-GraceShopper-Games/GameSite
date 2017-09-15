@@ -73,7 +73,7 @@ export default class AllProducts extends Component {
                     </Col>
                     <Col xs={12} md={2}>
                         <div key={product.id}>
-                            <Link to='/singleproduct'>Buy Now</Link>
+                            <Link to={'/singleproduct' + product.id}>Buy Now</Link>
                         </div>
                     </Col>
                     <Col xs={12} md={6}>
