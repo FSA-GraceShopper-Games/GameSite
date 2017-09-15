@@ -23,9 +23,9 @@ const Main = (props) => {
 
       <div id="wrapper" className="container-fluid">
         <Sidebar />
-        <AllProducts />
+        <AllProducts/>
+        <MyAccount />
       </div>
-      <MyAccount/>
     </div>
   )
 }

@@ -3,7 +3,9 @@ import React, { Component  } from 'react';
 import {connect} from 'react-redux';
 // import {Sidebar} from './Sidebar'
 import {Grid, Row, Col, FormControl, Container} from 'react-bootstrap';
-import SingleProduct from './SingleProduct'
+import SingleProd from './SingleProduct'
+import { fetchProducts } from '../store'
+console.log('dedrigrwignwrgingiwn', fetchProducts)
 
 const products = [
     {
@@ -57,15 +59,21 @@ const products = [
     }
 ]
 
-export default class AllProducts extends Component {
+class AllProducts extends Component {
 
     constructor(props) {
         super(props)
 
+        // this.fetchProductsOuter = this.fetchProductsOuter.bind(this)
+
+    }   
+
+    componentDidMount() {
+        this.props.fetchAllProducts()
     }
 
     render() {
-
+        console.log(this.props)
         const style = {
             backgroundColor: '#4EB1BA'
         }
@@ -76,7 +84,7 @@ export default class AllProducts extends Component {
                     Search Results:
                 </h1>
                 {
-                    products.map((product, ind) => {
+                    this.props.products.map((product, ind) => {
                         return (
                             <SingleProd key={ind} product={product}/>
                         )
@@ -87,14 +95,18 @@ export default class AllProducts extends Component {
     }
 }
 
-// const mapStateToProps = state => ({
+const mapState = state => ({
+    products: state.allproducts
+})
 
-// })
+const mapDispatch = dispatch => ({
+    fetchAllProducts() {
+        dispatch(fetchProducts())
+    },
+})
 
-// const mapDispatchToProps = dispatch => ({
+const AllProductsContainer = connect(mapState, mapDispatch)(AllProducts)
 
-// })
+export default AllProductsContainer
 
-// const AllProductsContainer = connect(mapStateToProps, mapDispatchToProps)(AllProducts)
 
-// export default AllProductsContainer

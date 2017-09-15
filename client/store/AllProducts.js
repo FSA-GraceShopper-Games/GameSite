@@ -24,12 +24,11 @@ export function fetchProducts() {
   return function thunk(dispatch) {
     const toJson = response => response.data;
     const result = products => {
-      const gotProductsFromServerAction = gotProductsFromServer(products);
-
-      dispatch(gotProductsFromServerAction);
+      const action = gotProductsFromServer(products);
+      dispatch(action);
     };
     const error = console.error.bind(console);
-
+    // console.log('rignrignrgingingiUSERIDIDDDDDDDDDD', )
     return axios.get('/api/products')
     .then(toJson)
     .then(result)

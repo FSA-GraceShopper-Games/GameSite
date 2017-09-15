@@ -5,9 +5,14 @@ import React, { Component  } from 'react';
 import {Grid, Row, Col, FormControl, Container} from 'react-bootstrap';
 import {connect} from 'react-redux'
 import { fetchOrdersForUser } from '../store'
+import Cart from './Cart'
+import EditInfo from './EditInfo'
+
 
 
  class MyAccount extends Component {
+
+
 
     constructor(props) {
         super(props)
@@ -64,12 +69,8 @@ import { fetchOrdersForUser } from '../store'
     renderCart() {
         return (
             <Row className="show-grid">
-            <Col xs={12} md={4}>
-                <h1>THIS IS YOUR cart  BROOOOOOO!!!!</h1>
-            </Col>
-            <Col xs={12} md={2}>
-            </Col>
-            <Col xs={12} md={6}>
+            <Col xs={12} md={12}>
+                <Cart/>
             </Col>
             </Row>
         )
@@ -90,12 +91,8 @@ import { fetchOrdersForUser } from '../store'
     renderEdit() {
         return (
             <Row className="show-grid">
-            <Col xs={12} md={4}>
-                <h1>THIS IS YOUR EDITTT  BROOOOOOO!!!!</h1>
-            </Col>
-            <Col xs={12} md={2}>
-            </Col>
-            <Col xs={12} md={6}>
+            <Col xs={12} md={12}>
+                <EditInfo />
             </Col>
             </Row>
         )
@@ -171,7 +168,7 @@ import { fetchOrdersForUser } from '../store'
         console.log(this.props)
 
         const style = {
-            backgroundColor: '#4EB1BA'
+            backgroundColor: '#E3DEC1',
         }
         const orders = this.props.orders
         return (
@@ -185,7 +182,7 @@ import { fetchOrdersForUser } from '../store'
                 </Row>
                 <Row className="show-grid">
                     <Col style={{borderRight: '3px solid black'}} xs={12} md={2}>
-                        <div style={{backgroundColor: "green"}}onClick={this.handleClickOrder}>
+                        <div style={{}}onClick={this.handleClickOrder}>
                         <h5 name='innerh5'> Order History</h5>
                         </div>
                     </Col>
@@ -236,7 +233,8 @@ const mapState = state => ({
 const mapDispatch = dispatch => ({
     fetchOrders(userId) {
         dispatch(fetchOrdersForUser(userId))
-    }
+    },
+
 })
 
 const MyAccountContainer = connect(mapState, mapDispatch)(MyAccount)
