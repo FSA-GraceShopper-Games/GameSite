@@ -1,4 +1,5 @@
-import React, { Component  } from 'react';
+import React, { Component } from 'react';
+import {Link} from 'react-router-dom'
 import {Grid, Row, Checkbox, Col, FormControl, ControlLabel, FormGroup} from 'react-bootstrap';
 import Form from './Form.js'
 
@@ -71,7 +72,9 @@ export default class AllProducts extends Component {
                         <img src={product.image}/>
                     </Col>
                     <Col xs={12} md={2}>
-                        <a href='' color='black'>Buy Now</a>
+                        <div key={product.id}>
+                            <Link to='/singleproduct'>Buy Now</Link>
+                        </div>
                     </Col>
                     <Col xs={12} md={6}>
                         <p>{product.description}</p>

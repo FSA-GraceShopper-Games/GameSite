@@ -76,9 +76,9 @@ class AllProducts extends Component {
                     Search Results:
                 </h1>
                 {
-                    products.map((product) => {
+                    products.map((product, i) => {
                         return (
-                            <SingleProd product={product}/>
+                            <SingleProd key={i} product={product}/>
                         )
                     })
                 }
