@@ -3,10 +3,10 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {withRouter, Link} from 'react-router-dom'
 import {logout} from '../store'
+import Sidebar from './Sidebar'
 import Navbar from './Navbar'
 import AllProducts from './AllProducts'
-import Sidebar from './Sidebar'
-
+import MyAccount from './MyAccount'
 /**
  * COMPONENT
  *  The Main component is our 'picture frame' - it displays the navbar and anything
@@ -18,15 +18,12 @@ const Main = (props) => {
 
   return (
     <div>
-     <Navbar />
+      <Navbar />
       <div id="wrapper" className="container-fluid">
-      
-    
-          <Sidebar />
-
-          <AllProducts />
-        
+        <Sidebar />
+        <AllProducts />
       </div>
+      <MyAccount/>
     </div>
   )
 }

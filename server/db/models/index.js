@@ -3,9 +3,14 @@ const Product = require('./product');
 const Review = require('./reviews.js')
 const LineItem = require('./lineItem.js')
 const Genre = require('./genre.js')
+const Order = require('./orders.js')
 
 LineItem.belongsTo(Product)
+LineItem.belongsTo(Order)
 
+Order.hasMany(LineItem)
+Order.belongsTo(User)
+User.hasMany(Order)
 User.hasMany(LineItem)
 LineItem.belongsTo(User)
 
@@ -32,10 +37,19 @@ User.hasMany(Review)
  * instead of: const User = require('../db/models/user')
  */
 
+//  Product.findOne({
+//    where: {
+//      id: 1
+//    }
+//  }).then((product) => {
+//   console.log('avgReview', product.avgReview())
+//  })
+
 module.exports = {
   User,
   Genre,
   Product,
   Review,
-  LineItem
+  LineItem,
+  Order
 }
