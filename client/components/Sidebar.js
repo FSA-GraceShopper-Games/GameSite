@@ -16,6 +16,7 @@ class Sidebar extends Component {
     
     filterByPrice(obj, e){
         // store.dispatch(fetchProducts())
+        if(!this.props.products.length) store.dispatch(fetchProducts())
         let min = obj.min
         let max = obj.max
         let products = this.props.products
