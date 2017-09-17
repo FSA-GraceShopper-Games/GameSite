@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 // import { Link } from 'react-router';
 import {connect} from 'react-redux';
-import {gotProductsFromServer, fetchProducts} from '../store' 
+import {gotProductsFromServer, fetchProducts, filterByProducts} from '../store' 
 import store from '../store'
 
 
@@ -16,17 +16,18 @@ class Sidebar extends Component {
     
     filterByPrice(obj, e){
         // store.dispatch(fetchProducts())
-        if(!this.props.products.length) store.dispatch(fetchProducts())
+        // if(!this.props.products.length) store.dispatch(fetchProducts())
         let min = obj.min
         let max = obj.max
         let products = this.props.products
         let filterProducts = products.filter(product => product.price >= min && product.price < max)
-        
-        store.dispatch(gotProductsFromServer(filterProducts))
-
-        
-        console.log('filter ', filterProducts)
-        console.log('products ', this.props.products)
+        store.dispatch(filterByProducts(filterProducts))
+        // store.dispatch(gotProductsFromServer(filterProducts))
+        console.log('my products ',products)
+        console.log('my filter productsa',this.props.filterProducts)
+        // console.log('does this work??? ', filterByProducts())
+        // console.log('filter ', filterProducts)
+        // console.log('products ', this.props.products)
     
     
     }
@@ -61,7 +62,8 @@ class Sidebar extends Component {
 
 const mapStateToProps = state => {
     return {
-        products: state.allproducts
+        products: state.allproducts,
+        filterProducts: state.filterProducts
     }
 }
 
