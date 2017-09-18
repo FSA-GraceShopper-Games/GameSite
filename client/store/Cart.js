@@ -7,7 +7,8 @@ const ADD_PRODUCT_TO_CART = 'ADD_PRODUCT_TO_CART';
 // const 
 
 // ACTION CREATORS
-export function addProductToCart(product, quantity) {
+
+export function addProd(product, quantity) {
   product.quantity = quantity;
   return {
     type: ADD_PRODUCT_TO_CART,
@@ -15,9 +16,10 @@ export function addProductToCart(product, quantity) {
   };
 }
 
-export function getCart(prod) {
+
+export function setCart(prod) {
     return {
-        GET_CART,
+        type: GET_CART,
         prod
     };
   }
@@ -25,13 +27,40 @@ export function getCart(prod) {
 // THUNK CREATORS
 
 
+export function addProductToCart(productId) {
+  return function (dispatch) {
+    return axios.get('/api/products/' + productId)
+    .then((res) => res.data)
+    .then((product) => {
+      console.log('product in here', product)
+      return axios.post('/api/cart', product)
+    })
+    .then((res)=> res.data)
+    .then((res) => {
+      console.log('this ran', res)
+      dispatch(addProd(res))
+      history.push('/home')      
+    })
+  }
+}
+
+export function fetchCart() {
+  return function(dispatch) {
+    return  axios.get('/api/cart')
+    .then((res) => res.data)
+    .then((resp) => {
+      console.log('after ifetched')
+      dispatch(setCart(resp))
+    })
+  }
+}
 // REDUCER
 export default function reducer(state = [], action) {
     switch (action.type) {
-      case ADD_PRODUCT_TO_CART:
-        return [...state, action.product];
       case GET_CART:
-        return state
+        return action.prod
+      case ADD_PRODUCT_TO_CART:
+        return [...state, action.product]
       default:
         return state;
     }

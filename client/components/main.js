@@ -22,7 +22,9 @@ const Main = (props) => {
       <Navbar />
       <div id="wrapper" className="container-fluid">
         <Sidebar />
-        {children}
+        {props.children}
+
+
       </div>
     </div>
   )
