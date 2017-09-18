@@ -17,7 +17,7 @@ export default function Review(props){
                     </Col>
                     <Col xs={12} md={6}>
                     {
-                        props.review.stars
+                        stars
                     }
                     </Col>
                     <Col xs={12} md={12}>
