@@ -5,8 +5,6 @@ import {withRouter, Link} from 'react-router-dom'
 import {logout} from '../store'
 import Sidebar from './Sidebar'
 import Navbar from './Navbar'
-import AllProducts from './AllProducts'
-import MyAccount from './MyAccount'
 
 
 /**
@@ -22,11 +20,9 @@ const Main = (props) => {
     <div>
 
       <Navbar />
-
       <div id="wrapper" className="container-fluid">
         <Sidebar />
-        <AllProducts/>
-        <MyAccount />
+        {children}
       </div>
     </div>
   )
