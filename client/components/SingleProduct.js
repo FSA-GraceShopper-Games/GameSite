@@ -59,7 +59,7 @@ export default class AllProducts extends Component {
                     <Col xs={12} md={6}>
                         <h1 style={{display: 'inline', marginRight: '30px'}}>{product.name} </h1>
                         <h3 style={{display: 'inline', marginRight: '30px'}}>${product.price}</h3>
-                      
+
 
 
                     </Col>
