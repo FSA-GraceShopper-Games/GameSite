@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 // import { Link } from 'react-router';
 import {connect} from 'react-redux';
-import {gotProductsFromServer, fetchProducts, filterByProducts} from '../store' 
+import {gotProductsFromServer, fetchProducts, filterByProducts} from '../store'
 import store from '../store'
 
 
@@ -13,7 +13,7 @@ class Sidebar extends Component {
         this.filterByPrice = this.filterByPrice.bind(this)
     }
 
-    
+
     filterByPrice(obj, e){
         // store.dispatch(fetchProducts())
         // if(!this.props.products.length) store.dispatch(fetchProducts())
@@ -28,8 +28,8 @@ class Sidebar extends Component {
         // console.log('does this work??? ', filterByProducts())
         // console.log('filter ', filterProducts)
         // console.log('products ', this.props.products)
-    
-    
+
+
     }
 
     render(){
@@ -47,7 +47,7 @@ class Sidebar extends Component {
                 <li>
                     sort by reviews
                     <ul>
-                       
+
                         <li style={{color: 'yellow'}}><a href="#">{"★★★★☆"} & Up</a></li>
                         <li style={{color: 'yellow'}}><a href="#">{"★★★☆☆"} & Up</a></li>
                         <li style={{color: 'yellow'}}><a href="#">{"★★☆☆☆"} & Up</a></li>
@@ -55,14 +55,14 @@ class Sidebar extends Component {
                     </ul>
                 </li>
             </ul>
-        </div>       
+        </div>
     )
     }
 }
 
 const mapStateToProps = state => {
     return {
-        products: state.allproducts,
+        products: state.allProducts,
         filterProducts: state.filterProducts
     }
 }
