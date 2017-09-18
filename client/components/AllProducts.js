@@ -94,7 +94,7 @@ class AllProducts extends Component {
 
                     this.props.products.map((product, ind) => {
                         return (
-                            <SingleProd key={ind} product={product}/>
+                            <SingleProd key={ind} price={product.price} product={product}/>
                         )
                     })
                 }
@@ -104,8 +104,9 @@ class AllProducts extends Component {
 }
 
 const mapState = state => ({
-    products: state.AllProducts,
     entirestate: state
+=======
+    products: state.filterProducts.length === 0 ? state.AllProducts : state.filterProducts
 })
 
 const mapDispatch = dispatch => ({

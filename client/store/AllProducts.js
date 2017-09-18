@@ -4,6 +4,7 @@ import axios from 'axios';
 const GOT_PRODUCTS_FROM_SERVER = 'GOT_PRODUCTS_FROM_SERVER';
 const ADD_PRODUCT = 'ADD_PRODUCT';
 
+
 // ACTION CREATORS
 export function gotProductsFromServer(products) {
   return {
@@ -18,6 +19,9 @@ export function addProduct(product) {
     product
   };
 }
+
+
+
 
 // THUNK CREATORS
 export function fetchProducts() {

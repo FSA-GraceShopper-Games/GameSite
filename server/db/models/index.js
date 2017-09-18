@@ -1,5 +1,5 @@
-const User = require('./user');
-const Product = require('./product');
+const User = require('./user')
+const Product = require('./product')
 const Review = require('./reviews.js')
 const LineItem = require('./lineItem.js')
 const Genre = require('./genre.js')
@@ -36,14 +36,6 @@ User.hasMany(Review)
  * for example, we can say: const {User} = require('../db/models')
  * instead of: const User = require('../db/models/user')
  */
-
-//  Product.findOne({
-//    where: {
-//      id: 1
-//    }
-//  }).then((product) => {
-//   console.log('avgReview', product.avgReview())
-//  })
 
 module.exports = {
   User,
