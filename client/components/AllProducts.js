@@ -86,7 +86,7 @@ class AllProducts extends Component {
                 {
                     this.props.products.map((product, ind) => {
                         return (
-                            <SingleProd key={ind} product={product}/>
+                            <SingleProd key={ind} price={product.price} product={product}/>
                         )
                     })
                 }

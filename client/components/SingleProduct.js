@@ -18,23 +18,23 @@ export default class AllProducts extends Component {
         super(props)
 
         this.state = {
-            price: this.props.product.price
+            // price: this.props.product.price
         }
-        this.handleClick = this.handleClick.bind(this)
+        // this.handleClick = this.handleClick.bind(this)
 
     }
 
 
-    handleClick(e) {
-        console.log(e.target.checked)
-        const newPrice = (this.props.product.price * 0.7).toFixed(2)
-        if (e.target.checked) {
-            this.setState({price: newPrice})
-        } else {
-            console.log('off')
-            this.setState({price: this.props.product.price})
-        }
-    }
+    // handleClick(e) {
+    //     console.log(e.target.checked)
+    //     const newPrice = (this.props.product.price * 0.7).toFixed(2)
+    //     if (e.target.checked) {
+    //         this.setState({price: newPrice})
+    //     } else {
+    //         console.log('off')
+    //         this.setState({price: this.props.product.price})
+    //     }
+    // }
 
     render() {
         const style = {
@@ -55,10 +55,8 @@ export default class AllProducts extends Component {
                 <Row className="show-grid">
                     <Col xs={12} md={6}>
                         <h1 style={{display: 'inline', marginRight: '30px'}}>{product.name} </h1>
-                        <h3 style={{display: 'inline', marginRight: '30px'}}>${this.state.price}</h3>
-                        <Checkbox inline onChange={this.handleClick}>
-                            Used
-                        </Checkbox>
+                        <h3 style={{display: 'inline', marginRight: '30px'}}>${product.price}</h3>
+                      
 
 
                     </Col>
@@ -84,3 +82,6 @@ export default class AllProducts extends Component {
         )
     }
 }
+//  // <Checkbox inline onChange={this.handleClick}>
+                        //     Used
+                        // </Checkbox>
