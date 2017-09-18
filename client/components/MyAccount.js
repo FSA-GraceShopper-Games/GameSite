@@ -4,7 +4,7 @@ import React, { Component  } from 'react';
 // import {Sidebar} from './Sidebar'
 import {Grid, Row, Col, FormControl, Container} from 'react-bootstrap';
 import {connect} from 'react-redux'
-import { fetchOrdersForUser } from '../store'
+import { fetchOrdersForUser, fetchCart } from '../store'
 import Cart from './Cart'
 import EditInfo from './EditInfo'
 
@@ -17,7 +17,7 @@ import EditInfo from './EditInfo'
     constructor(props) {
         super(props)
         this.state = {
-            showThis: ''    
+            showThis: ''
         }
         this.handleClickOrder =  this.handleClickOrder.bind(this)
         this.renderOrderHistory =  this.renderOrderHistory.bind(this)
@@ -31,15 +31,16 @@ import EditInfo from './EditInfo'
         this.handleClickHi =  this.handleClickHi.bind(this)
         this.handleClickEdit = this.handleClickEdit.bind(this)
         this.handleClickCart = this.handleClickCart.bind(this)
-        
+
     }
 
 
     componentDidMount() {
+        this.props.getTheCart()
         this.props.fetchOrders(3)
     }
 
-    
+
     renderOrderHistory() {
         function renderSingleOrder(order) {
             return (<div style={{borderTop: '5px solid blue'}}key={order.id}>
@@ -70,7 +71,7 @@ import EditInfo from './EditInfo'
         return (
             <Row className="show-grid">
             <Col xs={12} md={12}>
-                <Cart/>
+                <Cart cart={this.props.cart}/>
             </Col>
             </Row>
         )
@@ -159,13 +160,13 @@ import EditInfo from './EditInfo'
         } else {
             return <h1>nothing to show</h1>
         }
-    } 
+    }
 
 
-    
+
 
     render() {
-        console.log(this.props)
+        console.log('in my accout', this.props)
 
         const style = {
             backgroundColor: '#E3DEC1',
@@ -218,7 +219,7 @@ import EditInfo from './EditInfo'
                     </Col>
                 </Row>
                 {this.whatToRender()}
-                
+
             </Grid>
             <br/>
             </div>
@@ -227,13 +228,17 @@ import EditInfo from './EditInfo'
 }
 
 const mapState = state => ({
-    orders: state.order
+    orders: state.order,
+    cart: state.cart
 })
 
 const mapDispatch = dispatch => ({
     fetchOrders(userId) {
         dispatch(fetchOrdersForUser(userId))
     },
+    getTheCart() {
+        dispatch(fetchCart())
+    }   
 
 })
 

@@ -21,6 +21,7 @@ class Cart extends Component {
     }
 
     renderCartItem(product) {
+        console.log('product in rendercartitem', product)
         return (
             <div  key={product.name}>
             <Row>
@@ -56,7 +57,7 @@ class Cart extends Component {
         )
     }
     render() {
-        console.log(this.props)
+        
 
         const style = {
             backgroundColor: '#B94629'
@@ -72,7 +73,8 @@ class Cart extends Component {
                     </Col>
                 </Row>
                 {
-                   littleCart && littleCart.map((item) => {
+
+                    this.props.cart.map((item) => {
                         return this.renderCartItem(item)
                     })
                 }
@@ -94,9 +96,11 @@ class Cart extends Component {
 
 const mapState = state => ({
 
+
 })
 
 const mapDispatch = dispatch => ({
+
 })
 
 const CartContainer = connect(mapState, mapDispatch)(Cart)

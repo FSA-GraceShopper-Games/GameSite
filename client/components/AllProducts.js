@@ -10,10 +10,7 @@ class AllProducts extends Component {
 
     constructor(props) {
         super(props)
-
-        // this.fetchProductsOuter = this.fetchProductsOuter.bind(this)
-
-    }   
+    }
 
     componentDidMount() {
         this.props.fetchAllProducts();
@@ -35,7 +32,7 @@ class AllProducts extends Component {
 
                     this.props.products.map((product, ind) => {
                         return (
-                            <SingleProd key={ind} product={product}/>
+                            <SingleProd key={ind} price={product.price} product={product}/>
                         )
                     })
                 }
@@ -45,7 +42,8 @@ class AllProducts extends Component {
 }
 
 const mapState = state => ({
-    products: state.allproducts
+    entirestate: state,
+    products: state.filterProducts.length === 0 ? state.allProducts : state.filterProducts
 })
 
 const mapDispatch = dispatch => ({

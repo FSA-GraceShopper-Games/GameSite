@@ -5,14 +5,6 @@ import {withRouter} from 'react-router-dom'
 import {WholePageSingle} from '../components';
 import store, {getCart, addProductToCart} from '../store'
 
-let product =  {
-        id: 1,
-        name: 'Destiny',
-        image: 'https://images-na.ssl-images-amazon.com/images/I/51cNjbb5sbL._AC_US218_.jpg',
-        description: 'Picanha tri-tip meatloaf, short loin beef salami pork t-bone filet mignon cow flank porchetta cupim. Chuck ball tip biltong capicola pork, venison bacon bresaola shank jowl chicken fatback turducken. Sirloin landjaeger ground round salami cupim pork belly jerky beef ham hock burgdoggen jowl ball tip boudin. Frankfurter ham hock tri-tip venison turkey, pig t-bone spare ribs bresaola pork chop beef ribs prosciutto kielbasa salami fatback. Pastrami filet mignon bacon, tongue kielbasa meatball fatback tail biltong jowl ribeye pork loin corned beef pancetta.',
-        price: 59.99,
-        avgReview: 4
-    }
 
 class SingleProductContainer extends Component {
 
