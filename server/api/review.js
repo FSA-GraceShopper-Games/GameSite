@@ -16,6 +16,12 @@ router.get('/:id', (req, res, next) =>
         .catch(next)
 })
 
+router.get('/product/:id', (req, res, next) => 
+{   models.Review.findAll({where: {productId: req.params.id}})
+        .then(result => res.json(result))
+        .catch(next)
+})
+
 router.post('/', (req, res, next) =>
 {   models.Review.create(req.body)
         .then(result => res.json(result))

@@ -1,5 +1,5 @@
 import React, { Component  } from 'react';
-import {Grid, Row, Col, FormControl, ControlLabel, FormGroup} from 'react-bootstrap';
+import {FormControl, ControlLabel, FormGroup} from 'react-bootstrap';
 
 function FieldGroup({ id, label, help, ...props }) {
     return (
