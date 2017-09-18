@@ -1,5 +1,8 @@
-import React, { Component  } from 'react'
-import {Grid, Row, Checkbox, Col, FormControl, ControlLabel, FormGroup} from 'react-bootstrap'
+
+import React, { Component } from 'react';
+import {Link} from 'react-router-dom'
+import {Grid, Row, Checkbox, Col, FormControl, ControlLabel, FormGroup} from 'react-bootstrap';
+
 import Form from './Form.js'
 
 function FieldGroup({ id, label, help, ...props }) {
@@ -18,23 +21,23 @@ export default class AllProducts extends Component {
         super(props)
 
         this.state = {
-            price: this.props.product.price
+            // price: this.props.product.price
         }
-        this.handleClick = this.handleClick.bind(this)
+        // this.handleClick = this.handleClick.bind(this)
 
     }
 
 
-    handleClick(e) {
-        console.log(e.target.checked)
-        const newPrice = (this.props.product.price * 0.7).toFixed(2)
-        if (e.target.checked) {
-            this.setState({price: newPrice})
-        } else {
-            console.log('off')
-            this.setState({price: this.props.product.price})
-        }
-    }
+    // handleClick(e) {
+    //     console.log(e.target.checked)
+    //     const newPrice = (this.props.product.price * 0.7).toFixed(2)
+    //     if (e.target.checked) {
+    //         this.setState({price: newPrice})
+    //     } else {
+    //         console.log('off')
+    //         this.setState({price: this.props.product.price})
+    //     }
+    // }
 
     render() {
         const style = {
@@ -48,17 +51,15 @@ export default class AllProducts extends Component {
         for (var i = 0; i < product.avgReview; i++) {
             stars+= ' ☆'
         }
-
+        console.log(product)
         return (
             <div>
             <Grid style={style}>
                 <Row className="show-grid">
                     <Col xs={12} md={6}>
                         <h1 style={{display: 'inline', marginRight: '30px'}}>{product.name} </h1>
-                        <h3 style={{display: 'inline', marginRight: '30px'}}>${this.state.price}</h3>
-                        <Checkbox inline onChange={this.handleClick}>
-                            Used
-                        </Checkbox>
+                        <h3 style={{display: 'inline', marginRight: '30px'}}>${product.price}</h3>
+                      
 
 
                     </Col>
@@ -71,7 +72,9 @@ export default class AllProducts extends Component {
                         <img src={product.image}/>
                     </Col>
                     <Col xs={12} md={2}>
-                        <a href='' color='black'>Buy Now</a>
+                        <div key={product.id}>
+                            <Link to={'/singleproduct/' + product.id}>Buy Now</Link>
+                        </div>
                     </Col>
                     <Col xs={12} md={6}>
                         <p>{product.description}</p>
@@ -84,3 +87,6 @@ export default class AllProducts extends Component {
         )
     }
 }
+//  // <Checkbox inline onChange={this.handleClick}>
+                        //     Used
+                        // </Checkbox>
