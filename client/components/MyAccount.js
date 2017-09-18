@@ -17,7 +17,7 @@ import EditInfo from './EditInfo'
     constructor(props) {
         super(props)
         this.state = {
-            showThis: ''    
+            showThis: ''
         }
         this.handleClickOrder =  this.handleClickOrder.bind(this)
         this.renderOrderHistory =  this.renderOrderHistory.bind(this)
@@ -31,7 +31,7 @@ import EditInfo from './EditInfo'
         this.handleClickHi =  this.handleClickHi.bind(this)
         this.handleClickEdit = this.handleClickEdit.bind(this)
         this.handleClickCart = this.handleClickCart.bind(this)
-        
+
     }
 
 
@@ -39,7 +39,7 @@ import EditInfo from './EditInfo'
         this.props.fetchOrders(3)
     }
 
-    
+
     renderOrderHistory() {
         function renderSingleOrder(order) {
             return (<div style={{borderTop: '5px solid blue'}}key={order.id}>
@@ -159,10 +159,10 @@ import EditInfo from './EditInfo'
         } else {
             return <h1>nothing to show</h1>
         }
-    } 
+    }
 
 
-    
+
 
     render() {
         console.log(this.props)
@@ -218,7 +218,7 @@ import EditInfo from './EditInfo'
                     </Col>
                 </Row>
                 {this.whatToRender()}
-                
+
             </Grid>
             <br/>
             </div>
@@ -233,7 +233,7 @@ const mapState = state => ({
 const mapDispatch = dispatch => ({
     fetchOrders(userId) {
         dispatch(fetchOrdersForUser(userId))
-    },
+    }
 
 })
 
