@@ -1,5 +1,8 @@
-import React, { Component  } from 'react'
-import {Grid, Row, Checkbox, Col, FormControl, ControlLabel, FormGroup} from 'react-bootstrap'
+
+import React, { Component } from 'react';
+import {Link} from 'react-router-dom'
+import {Grid, Row, Checkbox, Col, FormControl, ControlLabel, FormGroup} from 'react-bootstrap';
+
 import Form from './Form.js'
 
 function FieldGroup({ id, label, help, ...props }) {
@@ -48,7 +51,7 @@ export default class AllProducts extends Component {
         for (var i = 0; i < product.avgReview; i++) {
             stars+= ' ☆'
         }
-
+        console.log(product)
         return (
             <div>
             <Grid style={style}>
@@ -71,7 +74,9 @@ export default class AllProducts extends Component {
                         <img src={product.image}/>
                     </Col>
                     <Col xs={12} md={2}>
-                        <a href='' color='black'>Buy Now</a>
+                        <div key={product.id}>
+                            <Link to={'/singleproduct/' + product.id}>Buy Now</Link>
+                        </div>
                     </Col>
                     <Col xs={12} md={6}>
                         <p>{product.description}</p>

@@ -8,6 +8,7 @@ import Navbar from './Navbar'
 import AllProducts from './AllProducts'
 import MyAccount from './MyAccount'
 
+
 /**
  * COMPONENT
  *  The Main component is our 'picture frame' - it displays the navbar and anything
@@ -19,6 +20,7 @@ const Main = (props) => {
 
   return (
     <div>
+
       <Navbar />
 
       <div id="wrapper" className="container-fluid">
