@@ -5,6 +5,7 @@ import {withRouter} from 'react-router-dom'
 import {WholePageSingle} from '../components';
 import store, {getCart, addProductToCart} from '../store'
 
+console.log(' u got to single product page')
 class SingleProductContainer extends Component {
 
   constructor (props) {
@@ -33,10 +34,11 @@ class SingleProductContainer extends Component {
 
   handleSubmit (evt) {
     evt.preventDefault();
-    console.log(evt.target.value)
+    var idparam = this.props.match.params.id
     const product = this.state.product
     const quantity = evt.target.value
-    this.props.addProductToCart(product, quantity);
+    this.props.addProductToCart(idparam, quantity);
+    // history.push('/')
   }
 
   render () {

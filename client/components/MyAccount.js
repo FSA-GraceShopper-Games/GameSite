@@ -4,7 +4,7 @@ import React, { Component  } from 'react';
 // import {Sidebar} from './Sidebar'
 import {Grid, Row, Col, FormControl, Container} from 'react-bootstrap';
 import {connect} from 'react-redux'
-import { fetchOrdersForUser } from '../store'
+import { fetchOrdersForUser, fetchCart } from '../store'
 import Cart from './Cart'
 import EditInfo from './EditInfo'
 
@@ -36,6 +36,7 @@ import EditInfo from './EditInfo'
 
 
     componentDidMount() {
+        this.props.getTheCart()
         this.props.fetchOrders(3)
     }
 
@@ -70,7 +71,7 @@ import EditInfo from './EditInfo'
         return (
             <Row className="show-grid">
             <Col xs={12} md={12}>
-                <Cart/>
+                <Cart cart={this.props.cart}/>
             </Col>
             </Row>
         )
@@ -165,7 +166,7 @@ import EditInfo from './EditInfo'
     
 
     render() {
-        console.log(this.props)
+        console.log('in my accout', this.props)
 
         const style = {
             backgroundColor: '#E3DEC1',
@@ -227,13 +228,17 @@ import EditInfo from './EditInfo'
 }
 
 const mapState = state => ({
-    orders: state.order
+    orders: state.order,
+    cart: state.cart
 })
 
 const mapDispatch = dispatch => ({
     fetchOrders(userId) {
         dispatch(fetchOrdersForUser(userId))
     },
+    getTheCart() {
+        dispatch(fetchCart())
+    }   
 
 })
 
