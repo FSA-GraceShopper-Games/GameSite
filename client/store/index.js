@@ -3,11 +3,12 @@ import createLogger from 'redux-logger'
 import thunkMiddleware from 'redux-thunk'
 import user from './user'
 
-import AllProducts from './AllProducts'
+import allproducts from './AllProducts'
 import cart from './Cart'
 import order from './Order'
+import reviews from './review'
 
-const reducer = combineReducers({user, AllProducts, cart, order})
+const reducer = combineReducers({user, allproducts, cart, order, reviews})
 const middleware = applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
 const store = createStore(reducer, middleware)
 
@@ -17,4 +18,5 @@ export * from './Cart'
 export * from './user';
 export * from './order';
 export * from './AllProducts';
+export * from './review'
 
