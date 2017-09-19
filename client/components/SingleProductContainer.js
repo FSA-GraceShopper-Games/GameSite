@@ -5,7 +5,7 @@ import {withRouter} from 'react-router-dom'
 import {WholePageSingle} from '../components';
 import store, {getCart, addProductToCart} from '../store'
 
-console.log(' u got to single product page')
+
 class SingleProductContainer extends Component {
 
   constructor (props) {
@@ -20,7 +20,6 @@ class SingleProductContainer extends Component {
   }
 
   componentDidMount(){
-    console.log(this.props)
     axios.get(`/${this.props.match.params.id}`)
       .then(product => this.setState({product}))
       .catch(console.error)
@@ -42,7 +41,6 @@ class SingleProductContainer extends Component {
   }
 
   render () {
-    console.log('im here')
     return (
       <WholePageSingle direction={this.state.carDirection}
                       index={this.state.carIndex}

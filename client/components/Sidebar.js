@@ -1,35 +1,17 @@
 import React, {Component} from 'react';
-// import { Link } from 'react-router';
 import {connect} from 'react-redux';
-import {gotProductsFromServer, fetchProducts, filterByProducts} from '../store'
-import store from '../store'
+import {filterByProducts} from '../store'
 
 
 class Sidebar extends Component {
 
-    constructor(props){
-        super(props)
 
-        this.filterByPrice = this.filterByPrice.bind(this)
-    }
-
-
-    filterByPrice(obj, e){
-        // store.dispatch(fetchProducts())
-        // if(!this.props.products.length) store.dispatch(fetchProducts())
+    filterByPrice(obj){
         let min = obj.min
         let max = obj.max
         let products = this.props.products
         let filterProducts = products.filter(product => product.price >= min && product.price < max)
-        store.dispatch(filterByProducts(filterProducts))
-        // store.dispatch(gotProductsFromServer(filterProducts))
-        console.log('my products ',products)
-        console.log('my filter productsa',this.props.filterProducts)
-        // console.log('does this work??? ', filterByProducts())
-        // console.log('filter ', filterProducts)
-        // console.log('products ', this.props.products)
-
-
+        this.props.filterProductByPrice(filterProducts)
     }
 
     render(){
@@ -48,10 +30,10 @@ class Sidebar extends Component {
                     sort by reviews
                     <ul>
 
-                        <li style={{color: 'yellow'}}><a href="#">{"★★★★☆"} & Up</a></li>
-                        <li style={{color: 'yellow'}}><a href="#">{"★★★☆☆"} & Up</a></li>
-                        <li style={{color: 'yellow'}}><a href="#">{"★★☆☆☆"} & Up</a></li>
-                        <li style={{color: 'yellow'}}><a href="#">{"★☆☆☆☆"} & Up</a></li>
+                        <li><a href="#">{"★★★★☆"} & Up</a></li>
+                        <li><a href="#">{"★★★☆☆"} & Up</a></li>
+                        <li><a href="#">{"★★☆☆☆"} & Up</a></li>
+                        <li><a href="#">{"★☆☆☆☆"} & Up</a></li>
                     </ul>
                 </li>
             </ul>
@@ -67,21 +49,15 @@ const mapStateToProps = state => {
     }
 }
 
-// const mapDispatchToProps = (dispatch, ownProps) => {
-//     return {
-//         filterByPrice(obj, e){
-//             let min = obj.min
-//             let max = obj.max
-//             let products = ownProps.products
-//             let filterProducts = products.filter(product => product.price >= min && product.price < max)
-//             // const filterProducts = this.props.products.filter(product => product.price > e.target.value.min && product.price < e.target.value.max)
-//             // console.log('yoooooo ', filterProducts)
-//             dispatch(gotProductsFromServer(filterProducts))
-//         }
-//     }
-// }
+const mapDispatchToProps = dispatch => {
+    return {
+        filterProductByPrice(products){
+            dispatch(filterByProducts(products));
+        }
+    }
+}
 
-const SidebarContainer = connect(mapStateToProps)(Sidebar)
+const SidebarContainer = connect(mapStateToProps, mapDispatchToProps)(Sidebar)
 export default SidebarContainer
 
 

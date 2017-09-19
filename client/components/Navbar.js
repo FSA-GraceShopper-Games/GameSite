@@ -1,14 +1,24 @@
 import React, { Component } from 'react'
 import { NavLink, withRouter } from 'react-router-dom'
 import {connect} from 'react-redux'
-import {logout} from '../store/user'
+import {logout, filterByProducts, fetchGenre} from '../store'
 
 class Navbar extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      inputVal: ''
+    }
 
     this.renderLoginSignup = this.renderLoginSignup.bind(this);
     this.renderMyAccountLogout = this.renderMyAccountLogout.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleSelect = this.handleSelect.bind(this);
+  }
+
+  componentDidMount(){
+    this.props.fetchAllGenre()
   }
 
   renderLoginSignup() {
@@ -41,7 +51,29 @@ class Navbar extends Component {
     )
   }
 
+  handleChange(evt){
+    const value = evt.target.value;
+    this.setState({
+      inputVal: value
+    });
+  }
+
+  handleSubmit(evt){
+    evt.preventDefault();
+    const inputValue = this.state.inputVal;
+    const filteredByInput = this.props.products.filter(product =>
+      product.name.startsWith(inputValue));
+    this.props.filterProducts(filteredByInput)
+  }
+
+  handleSelect(obj){
+    const filterBySelect = this.props.products.filter(product => 
+      product.genre.name === obj)
+     this.props.filterProducts(filterBySelect)
+  }
+
   render() {
+    console.log(this.props.products)
     return (
       <nav className="navbar fixed-top navbar-expand-lg navbar-light bg-light">
         <a className="navbar-brand" href="#">Ninja</a>
@@ -65,17 +97,35 @@ class Navbar extends Component {
                 Genre
               </a>
               <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a className="dropdown-item" href="#">Action</a>
-                <a className="dropdown-item" href="#">Adventure</a>
-                <a className="dropdown-item" href="#">Role-playing</a>
-                <a className="dropdown-item" href="#">Simulation</a>
-                <a className="dropdown-item" href="#">Strategy</a>
-                <a className="dropdown-item" href="#">Sports</a>
+                <ul >
+                  {
+                    this.props.genres.map(genre => {
+                      return (
+                        <li 
+                          
+                          onClick={() => this.handleSelect(genre.name)} 
+                          style={{listStyle:"none"}} 
+                          key={genre.id}>
+                          <a className="dropdown-item" href="#">
+                            {genre.name}
+                          </a>
+                        </li>
+                        )
+                    })
+                  }
+                </ul>
               </div>
             </li>
           </ul>
-          <form className="form-inline mr-auto">
-            <input className="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" />
+          <form onSubmit={this.handleSubmit} className="form-inline mr-auto">
+            <input 
+              className="form-control mr-sm-2" 
+              type="text" 
+              placeholder="Search" 
+              aria-label="Search"
+              value={this.state.inputVal}
+              onChange={this.handleChange}
+            />
             <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
           </form>
           { this.props.user.id ? this.renderMyAccountLogout() : this.renderLoginSignup() }
@@ -85,14 +135,26 @@ class Navbar extends Component {
   }
 }
 
-const mapStateToProps = state => ({ user: state.user })
+const mapStateToProps = state => ({ 
+  user: state.user,
+  products: state.allProducts,
+  genres: state.genres
+})
 
 const mapDispatchToProps = dispatch => ({
   logout: () => {
     dispatch(logout())
+  },
+  filterProducts: (products) =>{
+    dispatch(filterByProducts(products))
+  },
+  fetchAllGenre: ()=>{
+    dispatch(fetchGenre())
   }
 })
 
 const NavbarContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Navbar));
 
 export default NavbarContainer
+
+
