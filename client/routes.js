@@ -10,8 +10,6 @@ import {Main, Login, Signup, UserHome, WholePageSingle, AllProducts, SingleProdu
 import {me, fetchCart} from './store'
 // import MyAccount from './MyAccount'
 
-console.log(SingleProductContainer)
-console.log(AllProducts)
 /**
  * COMPONENT
  */

@@ -58,10 +58,12 @@ class SingleProductContainer extends Component {
 
 
   render () {
+
     console.log('im here', this.props)
     const reviews = this.props.reviews.filter(x => {return +x.productId === +this.props.match.params.id})
     const product = this.props.products.find(x => {return +x.id === +this.props.match.params.id})
       return(
+
       <WholePageSingle direction={this.state.carDirection}
                     index={this.state.carIndex}
                     handleCarSelect={this.handleCarSelect}

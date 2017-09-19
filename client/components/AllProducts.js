@@ -4,8 +4,8 @@ import {connect} from 'react-redux';
 // import {Sidebar} from './Sidebar'
 import {Col} from 'react-bootstrap';
 import SingleProd from './SingleProduct'
-import { fetchProducts, fetchAllReviews } from '../store'
 
+import { fetchProducts, fetchAllReviews } from '../store'
 
 class AllProducts extends Component {
 
@@ -19,7 +19,6 @@ class AllProducts extends Component {
     }
 
     render() {
-        console.log(this.props)
         const style = {
             backgroundColor: '#4EB1BA'
         }
@@ -44,8 +43,10 @@ class AllProducts extends Component {
 
 const mapState = state => ({
     entirestate: state,
-    products: state.filterProducts.length === 0 ? state.allProducts : state.filterProducts
+    products: state.filterProducts.length === 0 ? state.allProducts : state.filterProducts  //state.filterProducts
 })
+
+
 
 const mapDispatch = dispatch => ({
     fetchAllProducts() {
