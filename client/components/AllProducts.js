@@ -41,8 +41,10 @@ class AllProducts extends Component {
 
 const mapState = state => ({
     entirestate: state,
-    products: state.filterProducts//state.filterProducts.length === 0 ? state.allProducts : state.filterProducts
+    products: state.filterProducts.length === 0 ? state.allProducts : state.filterProducts  //state.filterProducts
 })
+
+
 
 const mapDispatch = dispatch => ({
     fetchAllProducts() {

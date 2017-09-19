@@ -61,7 +61,7 @@ class Navbar extends Component {
   handleSubmit(evt){
     evt.preventDefault();
     const inputValue = this.state.inputVal;
-    const filteredByInput = this.props.products.filter(product =>
+    const filteredByInput = this.props.filteredStuff.filter(product =>
       product.name.startsWith(inputValue));
     this.props.filterProducts(filteredByInput)
   }
@@ -73,7 +73,7 @@ class Navbar extends Component {
   }
 
   render() {
-    // console.log(this.props.products)
+    console.log(this.props.filteredStuff)
     return (
       <nav className="navbar fixed-top navbar-expand-lg navbar-light bg-light">
         <NavLink to='/' className="navbar-brand" href="#">Ninja</NavLink>
@@ -138,6 +138,7 @@ class Navbar extends Component {
 const mapStateToProps = state => ({ 
   user: state.user,
   products: state.allProducts,
+  filteredStuff: state.filterProducts,
   genres: state.genres
 })
 
