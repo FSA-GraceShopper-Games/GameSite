@@ -71,10 +71,11 @@ class Navbar extends Component {
     const filterBySelect = this.props.products.filter(product => 
       product.genre.name === obj)
      this.props.filterProducts(filterBySelect)
+     this.props.isDirty()
   }
 
   render() {
-    console.log(this.props.filteredStuff)
+   
     return (
       <nav className="navbar fixed-top navbar-expand-lg navbar-light bg-light">
         <NavLink to='/' className="navbar-brand" href="#">Ninja</NavLink>
