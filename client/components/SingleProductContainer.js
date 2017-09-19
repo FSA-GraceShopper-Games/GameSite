@@ -57,11 +57,25 @@ class SingleProductContainer extends Component {
   }
 
 
+  calculateAvgReview(){
+    let totalSum = this.props.reviews.reduce((accum, curr, i) => {return accum + curr.stars}, 0);
+    let reviewAvg = totalSum / this.props.reviews.length;
+    console.log('test', totalSum, this.props.reviews.length)
+    var stars = '';
+    for (var i = 0; i < reviewAvg; i++) {
+        stars+= ' ☆'
+    }
+    console.log(stars)
+    return stars;
+}
+
+
   render () {
 
     console.log('im here', this.props)
     const reviews = this.props.reviews.filter(x => {return +x.productId === +this.props.match.params.id})
     const product = this.props.products.find(x => {return +x.id === +this.props.match.params.id})
+    const avgReview = this.calculateAvgReview();
       return(
 
       <WholePageSingle direction={this.state.carDirection}
@@ -70,6 +84,7 @@ class SingleProductContainer extends Component {
                     handleSubmit={this.handleSubmit}
                     product={product}
                     reviews={reviews}
+                    avgReview={avgReview}
                     />
       )  
   }

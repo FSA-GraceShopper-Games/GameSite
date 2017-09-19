@@ -37,10 +37,10 @@ class AllProducts extends Component {
                     <Link className="btn btn-info p-2" to={'/product/add'} role="button">Add A Product</Link>
                 </div>
                 {
-
                     this.props.products.map((product, ind) => {
+                        let singleReviews = this.props.reviews.filter(x => {return product.id === x.productId})
                         return (
-                            <SingleProd key={ind} price={product.price} product={product}/>
+                            <SingleProd key={ind} price={product.price} product={product} reviews={singleReviews}/>
                         )
                     })
                 }
@@ -52,7 +52,9 @@ class AllProducts extends Component {
 const mapState = state => ({
     // dirty: state.dirty,
     entirestate: state,
+    reviews: state.reviews
     products: state.filterProducts.length === 0 && !state.dirty? state.allProducts : state.filterProducts  //state.filterProducts
+
 })
 
 
