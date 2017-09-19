@@ -56,7 +56,7 @@ export default class AllProducts extends Component {
         for (var i = 0; i < product.avgReview; i++) {
             stars+= ' ☆'
         }
-        // console.log(product)
+
         return (
             <div>
             <Grid style={style}>

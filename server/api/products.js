@@ -3,7 +3,9 @@ module.exports = router
 const models = require('../db/models')
 
 router.get('/', (req, res, next) =>
-{   models.Product.findAll()
+{   models.Product.findAll({
+        include: [{all:true}]
+})
         .then(result => res.json(result))
         .catch(next)
 })

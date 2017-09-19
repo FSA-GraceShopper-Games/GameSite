@@ -25,6 +25,7 @@ const Main = (props) => {
         {children}
 
 
+
       </div>
     </div>
   )
