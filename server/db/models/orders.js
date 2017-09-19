@@ -12,8 +12,10 @@ const Order = db.define('order', {
         type: Sequelize.INTEGER
     },
     date: {
-        type: Sequelize.DATE,
-        allowNull: false
+        type: Sequelize.STRING
+    },
+    address: {
+        type: Sequelize.STRING
     }
 })
 module.exports = Order

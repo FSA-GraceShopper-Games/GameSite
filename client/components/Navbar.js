@@ -1,14 +1,24 @@
 import React, { Component } from 'react'
 import { NavLink, withRouter } from 'react-router-dom'
 import {connect} from 'react-redux'
-import {logout} from '../store/user'
+import {logout, filterByProducts, fetchGenre, isDirty} from '../store'
 
 class Navbar extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      inputVal: ''
+    }
 
     this.renderLoginSignup = this.renderLoginSignup.bind(this);
     this.renderMyAccountLogout = this.renderMyAccountLogout.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleSelect = this.handleSelect.bind(this);
+  }
+
+  componentDidMount(){
+    this.props.fetchAllGenre()
   }
 
   renderLoginSignup() {
@@ -41,10 +51,33 @@ class Navbar extends Component {
     )
   }
 
+  handleChange(evt){
+    const value = evt.target.value;
+    this.setState({
+      inputVal: value
+    });
+  }
+
+  handleSubmit(evt){
+    evt.preventDefault();
+    const inputValue = this.state.inputVal;
+    const filteredByInput = this.props.filteredStuff.filter(product =>
+      product.name.startsWith(inputValue));
+    this.props.filterProducts(filteredByInput)
+    this.props.isDirty()
+  }
+
+  handleSelect(obj){
+    const filterBySelect = this.props.products.filter(product => 
+      product.genre.name === obj)
+     this.props.filterProducts(filterBySelect)
+  }
+
   render() {
+    console.log(this.props.filteredStuff)
     return (
       <nav className="navbar fixed-top navbar-expand-lg navbar-light bg-light">
-        <a className="navbar-brand" href="#">Ninja</a>
+        <NavLink to='/' className="navbar-brand" href="#">Ninja</NavLink>
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
@@ -52,7 +85,7 @@ class Navbar extends Component {
         <div className="collapse navbar-collapse" id="navbarNavDropdown">
           <ul className="navbar-nav">
             <li className="nav-item active">
-              <a className="nav-link" href="#">Games <span className="sr-only">(current)</span></a>
+              <a className="nav-link" href="/">Games <span className="sr-only">(current)</span></a>
             </li>
             <li className="nav-item">
               <a className="nav-link" href="#">Accessories</a>
@@ -65,17 +98,35 @@ class Navbar extends Component {
                 Genre
               </a>
               <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a className="dropdown-item" href="#">Action</a>
-                <a className="dropdown-item" href="#">Adventure</a>
-                <a className="dropdown-item" href="#">Role-playing</a>
-                <a className="dropdown-item" href="#">Simulation</a>
-                <a className="dropdown-item" href="#">Strategy</a>
-                <a className="dropdown-item" href="#">Sports</a>
+                <ul >
+                  {
+                    this.props.genres.map(genre => {
+                      return (
+                        <li 
+                          
+                          onClick={() => this.handleSelect(genre.name)} 
+                          style={{listStyle:"none"}} 
+                          key={genre.id}>
+                          <a className="dropdown-item" href="#">
+                            {genre.name}
+                          </a>
+                        </li>
+                        )
+                    })
+                  }
+                </ul>
               </div>
             </li>
           </ul>
-          <form className="form-inline mr-auto">
-            <input className="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" />
+          <form onSubmit={this.handleSubmit} className="form-inline mr-auto">
+            <input 
+              className="form-control mr-sm-2" 
+              type="text" 
+              placeholder="Search" 
+              aria-label="Search"
+              value={this.state.inputVal}
+              onChange={this.handleChange}
+            />
             <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
           </form>
           { this.props.user.id ? this.renderMyAccountLogout() : this.renderLoginSignup() }
@@ -85,14 +136,30 @@ class Navbar extends Component {
   }
 }
 
-const mapStateToProps = state => ({ user: state.user })
+const mapStateToProps = state => ({ 
+  user: state.user,
+  products: state.allProducts,
+  filteredStuff: state.filterProducts,
+  genres: state.genres
+})
 
 const mapDispatchToProps = dispatch => ({
   logout: () => {
     dispatch(logout())
+  },
+  filterProducts: (products) =>{
+    dispatch(filterByProducts(products))
+  },
+  fetchAllGenre: ()=>{
+    dispatch(fetchGenre())
+  },
+  isDirty: ()=>{
+    dispatch(isDirty())
   }
 })
 
 const NavbarContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Navbar));
 
 export default NavbarContainer
+
+

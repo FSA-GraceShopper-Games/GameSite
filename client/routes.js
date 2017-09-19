@@ -5,13 +5,11 @@ import {Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
 
-import {Main, Login, Signup, UserHome, WholePageSingle, AllProducts, SingleProductContainer, MyAccount, Addreviewform} from './components'
+import {Main, Login, Signup, UserHome, WholePageSingle, AllProducts, SingleProductContainer, MyAccount, AddProduct, EditProduct, Addreviewform} from './components'
 
-import {me} from './store'
+import {me, fetchCart} from './store'
 // import MyAccount from './MyAccount'
 
-console.log(SingleProductContainer)
-console.log(AllProducts)
 /**
  * COMPONENT
  */
@@ -22,6 +20,7 @@ class Routes extends Component {
   }
   componentDidMount () {
     this.props.loadInitialData()
+    this.props.getTheCart()
   }
 
   calculateAvgReview(){
@@ -54,7 +53,15 @@ class Routes extends Component {
             <Route exact path='/addreview/:id' component={Addreviewform} />
             <Route exact path='/singleproduct/:id' component={SingleProductContainer} />
             <Route path='/myaccount' component={MyAccount} />
-            <Route path='/' component={AllProducts} avgReview={stars}/>
+
+            <Route exact path='/' component={AllProducts} />
+            <Route path="/product/add" render={
+              (routeProps) => <AddProduct history={routeProps.history} />
+            } />
+            <Route path='/products/:productId/edit' render={
+              (routeProps) => <EditProduct productId={routeProps.match.params.productId} history={routeProps.history} />
+            } />
+            <Route path='/' component={AllProducts} />
             {
               isLoggedIn &&
                 <Switch>
@@ -87,7 +94,11 @@ class Routes extends Component {
       return {
         loadInitialData () {
           dispatch(me())
+        },
+        getTheCart() {
+          dispatch(fetchCart())
         }
+
       }
     }
 

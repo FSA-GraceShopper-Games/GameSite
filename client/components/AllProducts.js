@@ -2,8 +2,13 @@ import React, { Component  } from 'react';
 // import {  } from '../store';
 import {connect} from 'react-redux';
 // import {Sidebar} from './Sidebar'
-import {Col} from 'react-bootstrap';
+import {Grid, Row, Col, FormControl, Container} from 'react-bootstrap';
+import {Link} from 'react-router-dom'
+
+
+
 import SingleProd from './SingleProduct'
+
 import { fetchProducts, fetchAllReviews } from '../store'
 
 class AllProducts extends Component {
@@ -18,16 +23,19 @@ class AllProducts extends Component {
     }
 
     render() {
-        console.log(this.props)
         const style = {
             backgroundColor: '#4EB1BA'
         }
+        console.log('is this shit dirty??? ', this.props.dirty)
         return (
 
                 <Col xs={12} md={12} style={style}>
                 <h1>
                     Search Results:
                 </h1>
+                <div className="d-flex justify-content-end" style={{padding: '0.75rem'}}>
+                    <Link className="btn btn-info p-2" to={'/product/add'} role="button">Add A Product</Link>
+                </div>
                 {
                     this.props.products.map((product, ind) => {
                         let singleReviews = this.props.reviews.filter(x => {return product.id === x.productId})
@@ -42,10 +50,14 @@ class AllProducts extends Component {
 }
 
 const mapState = state => ({
+    // dirty: state.dirty,
     entirestate: state,
-    products: state.filterProducts.length === 0 ? state.allProducts : state.filterProducts,
     reviews: state.reviews
+    products: state.filterProducts.length === 0 && !state.dirty? state.allProducts : state.filterProducts  //state.filterProducts
+
 })
+
+
 
 const mapDispatch = dispatch => ({
     fetchAllProducts() {
