@@ -22,17 +22,16 @@ export function addProduct(product) {
 
 
 
+const toJson = response => response.data;
 
 // THUNK CREATORS
 export function fetchProducts() {
   return function thunk(dispatch) {
-    const toJson = response => response.data;
     const result = products => {
       const action = gotProductsFromServer(products);
       dispatch(action);
     };
     const error = console.error.bind(console);
-    // console.log('rignrignrgingingiUSERIDIDDDDDDDDDD', )
     return axios.get('/api/products')
     .then(toJson)
     .then(result)
@@ -42,7 +41,6 @@ export function fetchProducts() {
 
 export function postProduct(product, history) {
   return function thunk(dispatch) {
-    const toJson = response => response.data;
     const result = product => {
       const addProductAction = addProduct(product);
 
@@ -61,7 +59,6 @@ export function postProduct(product, history) {
 
 export function updateProduct(productId, product, history) {
   return function thunk(dispatch, getState) {
-    const toJson = response => response.data;
     const result = updatedProduct => {
       const products = getState().products.map(product => (
         product.id === updatedProduct.id ? updatedProduct : product

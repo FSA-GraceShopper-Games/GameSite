@@ -7,7 +7,7 @@ import history from './history'
 
 import {Main, Login, Signup, UserHome, WholePageSingle, AllProducts, SingleProductContainer, MyAccount, Addreviewform} from './components'
 
-import {me} from './store'
+import {me, fetchCart} from './store'
 // import MyAccount from './MyAccount'
 
 console.log(SingleProductContainer)
@@ -19,6 +19,7 @@ console.log(AllProducts)
 class Routes extends Component {
   componentDidMount () {
     this.props.loadInitialData()
+    this.props.getTheCart()
   }
 
   render () {
@@ -67,7 +68,11 @@ class Routes extends Component {
       return {
         loadInitialData () {
           dispatch(me())
+        },
+        getTheCart() {
+          dispatch(fetchCart())
         }
+
       }
     }
 

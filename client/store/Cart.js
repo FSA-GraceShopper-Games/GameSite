@@ -32,9 +32,32 @@ export function addProductToCart(productId) {
     return axios.get('/api/products/' + productId)
     .then((result) => result.data)
     .then((product) => {
-      console.log('product in here', product)
       return axios.post('/api/cart', product)
     })
+    .then((res)=> res.data)
+    .then((res) => {
+      dispatch(addProd(res))
+    })
+  }
+}
+
+export function emptyCart() {
+  return function (dispatch) {
+    return axios.delete('/api/cart')
+    .then((res) => res.data)
+    .then((res) => {
+      dispatch(setCart(res))
+      dispatch(fetchCart())
+    })
+  }
+}
+export function removeFromCart(id) {
+  return function (dispatch) {
+    return axios.put('/api/cart/', {id})
+    .then((res) => res.data)
+    .then((res) => {
+      console.log('WHAT AOBUT H HRE')
+      dispatch(fetchCart(res))
     .then((prod)=> prod.data)
     .then((prodInCart) => {
       console.log('this ran', prodInCart)
@@ -48,9 +71,8 @@ export function fetchCart() {
   return function(dispatch) {
     return  axios.get('/api/cart')
     .then((res) => res.data)
-    .then((resp) => {
-      console.log('after ifetched')
-      dispatch(setCart(resp))
+    .then((res) => {
+      dispatch(setCart(res))
     })
   }
 }

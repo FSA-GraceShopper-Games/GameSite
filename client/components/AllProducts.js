@@ -6,6 +6,7 @@ import {Col} from 'react-bootstrap';
 import SingleProd from './SingleProduct'
 import { fetchProducts, fetchAllReviews } from '../store'
 
+
 class AllProducts extends Component {
 
     constructor(props) {
