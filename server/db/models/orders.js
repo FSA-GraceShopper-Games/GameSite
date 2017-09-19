@@ -11,7 +11,7 @@ const Order = db.define('order', {
     totalPrice:  {
         type: Sequelize.INTEGER
     },
-    date: {
+    email: {
         type: Sequelize.STRING
     },
     address: {
