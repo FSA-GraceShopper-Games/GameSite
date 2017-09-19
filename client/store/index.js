@@ -9,7 +9,7 @@ import reviews from './review'
 
 import filterProducts from './filterProducts'
 
-const reducer = combineReducers({user, order, allProducts, filterProducts})
+const reducer = combineReducers({user, order, allProducts, filterProducts, reviews})
 
 
 const middleware = applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
