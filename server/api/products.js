@@ -10,7 +10,7 @@ router.get('/', (req, res, next) =>
         .catch(next)
 })
 
-router.get('/:id', (req, res, next) => 
+router.get('/:id', (req, res, next) =>
 {   models.Product.findOne({where: {id: req.params.id}})
         .then(result => res.json(result))
         .catch(next)
@@ -22,19 +22,39 @@ router.get('/genre/:id', (req, res, next) =>{
                 .catch(next)
 })
 
-router.post('/', (req, res, next) =>
+function adminGatekeeper(req, res, next) {
+     if (!req.user) {
+        res.sendStatus(401);
+     } else if (!req.user.isAdmin) {
+        res.sendStatus(403);
+     } else {
+        next();
+     }
+}
+
+router.post('/', adminGatekeeper, (req, res, next) =>
 {   models.Product.create(req.body)
         .then(result => res.json(result))
         .catch(next)
 })
 
-router.put('/:id', (req, res, next) =>
+function selfOrAdminGatekeeper(req, res, next) {
+        if (!req.user) {
+          res.sendStatus(401);
+        } else if (!req.user.isAdmin && req.user.id !== req.params.id) {
+          res.sendStatus(403);
+        } else {
+          next();
+        }
+}
+
+router.put('/:id', selfOrAdminGatekeeper, (req, res, next) =>
 {   models.Product.findOne({where: {id: req.params.id}})
         .then(result => result.update(req.body, {returning: true}))
         .then(updatedProd => res.json(updatedProd[1]))
 })
 
-router.delete('/:id', (req,res,next) =>
+router.delete('/:id', selfOrAdminGatekeeper, (req,res,next) =>
 {   models.Product.findOne({where: {id : req.params.id}})
         .then(result => result.destroy())
         .then(res.json('success!!!!'))

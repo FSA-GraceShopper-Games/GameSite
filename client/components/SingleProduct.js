@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom'
 import {Grid, Row, Checkbox, Col, FormControl, ControlLabel, FormGroup} from 'react-bootstrap';
-
+import store, {removeProduct} from '../store'
 import Form from './Form.js'
 
 function FieldGroup({ id, label, help, ...props }) {
@@ -24,6 +24,7 @@ export default class AllProducts extends Component {
             // price: this.props.product.price
         }
         // this.handleClick = this.handleClick.bind(this)
+        this.deleteProduct = this.deleteProduct.bind(this);
 
     }
 
@@ -38,6 +39,10 @@ export default class AllProducts extends Component {
     //         this.setState({price: this.props.product.price})
     //     }
     // }
+
+    deleteProduct(productId) {
+        store.dispatch(removeProduct(productId));
+    }
 
     render() {
         const style = {
@@ -78,6 +83,10 @@ export default class AllProducts extends Component {
                     </Col>
                     <Col xs={12} md={6}>
                         <p>{product.description}</p>
+                    </Col>
+                    <Col xs={12}>
+                        <Link className="btn btn-info gutter" to={`/products/${product.id}/edit`} role="button">Edit</Link>
+                        <button type="button" className="btn btn-info p-2" onClick={() => this.deleteProduct(product.id)}>Delete</button>
                     </Col>
                 </Row>
             </Grid>

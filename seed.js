@@ -21,7 +21,7 @@ var Genre = require('./server/db/models').Genre
 
 console.log('userrrrrr', User)
 var numUsers = 20;
-var numProducts = 100; 
+var numProducts = 100;
 var numReviews = 50;
 
 
@@ -51,7 +51,8 @@ function randUser () {
     image: randPhoto(gender),
     email: emails.pop(),
     password: chance.word(),
-    introduction: 'Bresaola brisket frankfurter alcatra pork chop doner jowl. Chicken pork andouille ham, pork chop shoulder pancetta. Turducken alcatra venison chicken ground round burgdoggen. Short ribs picanha shoulder andouille sirloin filet mignon. Meatball hamburger sirloin shankle, brisket tail porchetta ham salami beef.'
+    introduction: 'Bresaola brisket frankfurter alcatra pork chop doner jowl. Chicken pork andouille ham, pork chop shoulder pancetta. Turducken alcatra venison chicken ground round burgdoggen. Short ribs picanha shoulder andouille sirloin filet mignon. Meatball hamburger sirloin shankle, brisket tail porchetta ham salami beef.',
+    isAdmin: false
 
   });
 }
@@ -98,14 +99,16 @@ function generateUsers () {
     image: 'http://learndotresources.s3.amazonaws.com/workshop/55e5c92fe859dc0300619bc8/zeke-astronaut.png',
     email: 'zeke@zeke.zeke',
     password: '123',
-    introduction: 'irfwinf'
+    introduction: 'irfwinf',
+    isAdmin: true
   }));
   users.push(User.build({
     name: 'Omri Bernstein',
     image: 'http://learndotresources.s3.amazonaws.com/workshop/55e5c92fe859dc0300619bc8/sloth.jpg',
     email: 'omri@zeke.zeke',
     password: '123',
-    introduction: 'rrkfirf'
+    introduction: 'rrkfirf',
+    isAdmin: true
   }));
   return users;
 }
