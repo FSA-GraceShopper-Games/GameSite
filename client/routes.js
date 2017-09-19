@@ -5,7 +5,7 @@ import {Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
 
-import {Main, Login, Signup, UserHome, WholePageSingle, AllProducts, SingleProductContainer, MyAccount} from './components'
+import {Main, Login, Signup, UserHome, WholePageSingle, AllProducts, SingleProductContainer, MyAccount, Addreviewform} from './components'
 
 import {me, fetchCart} from './store'
 // import MyAccount from './MyAccount'
@@ -32,7 +32,7 @@ class Routes extends Component {
             {/* <Route exact path='/' component={AllProducts} /> */}
             <Route path='/login' component={Login} />
             <Route path='/signup' component={Signup} />
-
+            <Route exact path='/addreview/:id' component={Addreviewform} />
             <Route exact path='/singleproduct/:id' component={SingleProductContainer} />
             <Route path='/myaccount' component={MyAccount} />
             <Route path='/' component={AllProducts} />

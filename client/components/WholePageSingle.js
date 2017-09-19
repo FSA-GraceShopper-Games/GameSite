@@ -1,6 +1,7 @@
 import React, { Component  } from 'react';
 import {withRouter} from 'react-router'
-import {Grid, Row, Checkbox, Col, FormControl, ControlLabel, FormGroup, Carousel} from 'react-bootstrap';
+import {Link} from 'react-router-dom'
+import {Grid, Row, Checkbox, Col, FormControl, ControlLabel, FormGroup, Carousel, Button} from 'react-bootstrap';
 import Form from './BuyNowForm.js'
 import Review from './Reviews'
 
@@ -45,6 +46,9 @@ function WholePageSingle(props){
                 }
             </Col>
         </Row>
+            <Link to={'/addreview/'+ props.product.id}>
+                <Button>Add A Review</Button>
+            </Link>
             <Col xs={6} md={4} lg={3}>
                 <Form handleSubmit={props.handleSubmit}/>
             </Col>

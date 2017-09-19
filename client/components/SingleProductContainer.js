@@ -15,7 +15,6 @@ class SingleProductContainer extends Component {
       carDirection: null,
       carIndex: 0
     };
-    this.setState({SingleProduct: this.props.products.find(x => {return +x.id === +this.props.match.params.id})})
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleCarSelect = this.handleCarSelect.bind(this);
   }
@@ -36,6 +35,7 @@ class SingleProductContainer extends Component {
   handleSubmit (evt) {
     evt.preventDefault();
     console.log(this.props.products)
+<<<<<<< cartfix
     const product = this.props.products.find(x => {return +x.id === +this.props.match.params.id})
     const quantity = evt.target.value
     var shouldIadd = true;
@@ -51,11 +51,15 @@ class SingleProductContainer extends Component {
       this.props.addProductToCart(idparam, quantity);
       this.props.getTheCart()
     }
+=======
+    const productId = this.props.match.params.id
+    this.props.addProductToCart(productId);
+>>>>>>> master
   }
 
 
   render () {
-    console.log('im here', this.state)
+    console.log('im here', this.props)
     const reviews = this.props.reviews.filter(x => {return +x.productId === +this.props.match.params.id})
     const product = this.props.products.find(x => {return +x.id === +this.props.match.params.id})
       return(
@@ -72,7 +76,6 @@ class SingleProductContainer extends Component {
 
 const mapStateToProps = state => ({
   cart: state.cart
-
   products: state.allproducts,
   reviews: state.reviews
 })
