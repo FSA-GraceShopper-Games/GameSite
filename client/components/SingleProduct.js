@@ -27,17 +27,18 @@ export default class AllProducts extends Component {
 
     }
 
-
-    // handleClick(e) {
-    //     console.log(e.target.checked)
-    //     const newPrice = (this.props.product.price * 0.7).toFixed(2)
-    //     if (e.target.checked) {
-    //         this.setState({price: newPrice})
-    //     } else {
-    //         console.log('off')
-    //         this.setState({price: this.props.product.price})
-    //     }
-    // }
+    calculateAvgReview(){
+        let totalSum = this.props.reviews.reduce((accum, curr, i) => {return accum + curr.stars}, 0);
+        let reviewAvg = totalSum / this.props.reviews.length;
+        console.log('test', totalSum, this.props.reviews.length)
+        var stars = '';
+        for (var i = 0; i < reviewAvg; i++) {
+            stars+= ' ☆'
+        }
+        console.log(stars)
+        return stars;
+    }
+    
 
     render() {
         const style = {
@@ -45,13 +46,10 @@ export default class AllProducts extends Component {
             color: '#E9E9E9',
             border: '3px solid #4EB1BA'
         }
+
         const product = this.props.product
-
-        var stars ='';
-        for (var i = 0; i < product.avgReview; i++) {
-            stars+= ' ☆'
-        }
-
+        const stars = this.calculateAvgReview();
+        
         return (
             <div>
             <Grid style={style}>

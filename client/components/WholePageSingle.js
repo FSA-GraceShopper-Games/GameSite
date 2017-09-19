@@ -5,17 +5,6 @@ import {Grid, Row, Checkbox, Col, FormControl, ControlLabel, FormGroup, Carousel
 import Form from './BuyNowForm.js'
 import Review from './Reviews'
 
-const game = {
-    name: "Destiny",
-    description: "Some Game",
-    images: [
-        'https://assets.vg247.com/current//2017/03/destiny_2.jpg', 
-        'https://rectifygaming.com/wp-content/uploads/2016/09/destiny-bungie-main.jpg',
-        'https://rectifygaming.com/wp-content/uploads/2016/09/destiny-bungie-main.jpg',
-        'http://vignette4.wikia.nocookie.net/video151/images/5/59/Destiny_The_Taken_King_Multiplayer_Gameplay_-_IGN_Live_E3_2015/revision/latest?cb=20150617002312'
-    ],
-    price: 59
-}
 
 function WholePageSingle(props){
 
@@ -35,6 +24,11 @@ function WholePageSingle(props){
                 </Carousel>
             </Col>
             <Col xs={6} md={8} lg={12}>
+                {
+                    <Row>
+                        <h2> Average Review = {props.avgReview}</h2>
+                    </Row>
+                }
                 {
                     props.reviews.map(function(x){
                         return (

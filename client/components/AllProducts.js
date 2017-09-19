@@ -29,10 +29,10 @@ class AllProducts extends Component {
                     Search Results:
                 </h1>
                 {
-
                     this.props.products.map((product, ind) => {
+                        let singleReviews = this.props.reviews.filter(x => {return product.id === x.productId})
                         return (
-                            <SingleProd key={ind} price={product.price} product={product}/>
+                            <SingleProd key={ind} price={product.price} product={product} reviews={singleReviews}/>
                         )
                     })
                 }
@@ -43,7 +43,8 @@ class AllProducts extends Component {
 
 const mapState = state => ({
     entirestate: state,
-    products: state.filterProducts.length === 0 ? state.allProducts : state.filterProducts
+    products: state.filterProducts.length === 0 ? state.allProducts : state.filterProducts,
+    reviews: state.reviews
 })
 
 const mapDispatch = dispatch => ({
