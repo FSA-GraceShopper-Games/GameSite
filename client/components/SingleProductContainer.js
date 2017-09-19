@@ -35,11 +35,11 @@ class SingleProductContainer extends Component {
   handleSubmit (evt) {
     evt.preventDefault();
     console.log(this.props.products)
-<<<<<<< cartfix
     const product = this.props.products.find(x => {return +x.id === +this.props.match.params.id})
     const quantity = evt.target.value
     var shouldIadd = true;
-
+    var idparam = this.props.match.params.id
+    
     for(var i = 0; i < this.props.cart.length;i++) {
       var item = this.props.cart[i];
       if (item.id == idparam) {
@@ -47,14 +47,13 @@ class SingleProductContainer extends Component {
         break;
       }
     }
+
     if (shouldIadd) {
       this.props.addProductToCart(idparam, quantity);
       this.props.getTheCart()
+    } else {
+      alert('u cannot add, already added')
     }
-=======
-    const productId = this.props.match.params.id
-    this.props.addProductToCart(productId);
->>>>>>> master
   }
 
 
@@ -75,8 +74,8 @@ class SingleProductContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-  cart: state.cart
-  products: state.allproducts,
+  cart: state.cart,
+  products: state.allProducts,
   reviews: state.reviews
 })
   
