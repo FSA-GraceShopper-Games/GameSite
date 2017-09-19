@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import {Grid, Row, Col, FormControl, Container} from 'react-bootstrap';
 import {Link} from 'react-router-dom'
 
-import {Col} from 'react-bootstrap';
+
 
 import SingleProd from './SingleProduct'
 
