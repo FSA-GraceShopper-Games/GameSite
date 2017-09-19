@@ -3,7 +3,7 @@ import axios from 'axios'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
 import {WholePageSingle} from '../components';
-import store, {getCart, addProductToCart} from '../store'
+import store, {fetchCart, addProductToCart} from '../store'
 
 
 class SingleProductContainer extends Component {
@@ -24,6 +24,7 @@ class SingleProductContainer extends Component {
       .then(product => this.setState({product}))
       .catch(console.error)
   }
+
   handleCarSelect (selectedIndex, evt){
     this.setState({
       carIndex: selectedIndex,
@@ -33,38 +34,58 @@ class SingleProductContainer extends Component {
 
   handleSubmit (evt) {
     evt.preventDefault();
-    var idparam = this.props.match.params.id
-    const product = this.state.product
+    console.log(this.props.products)
+    const product = this.props.products.find(x => {return +x.id === +this.props.match.params.id})
     const quantity = evt.target.value
-    this.props.addProductToCart(idparam, quantity);
-    // history.push('/')
+    var shouldIadd = true;
+    var idparam = this.props.match.params.id
+    
+    for(var i = 0; i < this.props.cart.length;i++) {
+      var item = this.props.cart[i];
+      if (item.id == idparam) {
+        shouldIadd = false;
+        break;
+      }
+    }
+
+    if (shouldIadd) {
+      this.props.addProductToCart(idparam, quantity);
+      this.props.getTheCart()
+    } else {
+      alert('u cannot add, already added')
+    }
   }
 
+
   render () {
-    return (
+
+    console.log('im here', this.props)
+    const reviews = this.props.reviews.filter(x => {return +x.productId === +this.props.match.params.id})
+    const product = this.props.products.find(x => {return +x.id === +this.props.match.params.id})
+      return(
+
       <WholePageSingle direction={this.state.carDirection}
-                      index={this.state.carIndex}
-                      handleCarSelect={this.handleCarSelect}
-                      handleSubmit={this.handleSubmit}
-                      />
-    );   
+                    index={this.state.carIndex}
+                    handleCarSelect={this.handleCarSelect}
+                    handleSubmit={this.handleSubmit}
+                    product={product}
+                    reviews={reviews}
+                    />
+      )  
   }
 }
 
 const mapStateToProps = state => ({
+  cart: state.cart,
+  products: state.allProducts,
+  reviews: state.reviews
 })
   
 const mapDispatchToProps = dispatch => ({
-  addProductToCart: (product) => dispatch(addProductToCart(product))
+  addProductToCart: (product) => dispatch(addProductToCart(product)),
+  getTheCart: () => {
+    dispatch(fetchCart())
+  }
 })
   
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SingleProductContainer))
-
-/* const mapDispatchToProps = dispatch => ({
-    someFunc: (someData) => dispatch(someFunc(someData))
-})
-const mapPropsToState = function(store){
-  return{
-    newState: store.students
-  }
-}; */

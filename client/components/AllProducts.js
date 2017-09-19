@@ -2,9 +2,10 @@ import React, { Component  } from 'react';
 // import {  } from '../store';
 import {connect} from 'react-redux';
 // import {Sidebar} from './Sidebar'
-import {Grid, Row, Col, FormControl, Container} from 'react-bootstrap';
+import {Col} from 'react-bootstrap';
 import SingleProd from './SingleProduct'
-import { fetchProducts } from '../store'
+
+import { fetchProducts, fetchAllReviews } from '../store'
 
 class AllProducts extends Component {
 
@@ -13,7 +14,8 @@ class AllProducts extends Component {
     }
 
     componentDidMount() {
-        this.props.fetchAllProducts()
+        this.props.fetchAllProducts();
+        this.props.fetchAllReviews();
     }
 
     render() {
@@ -50,6 +52,9 @@ const mapDispatch = dispatch => ({
     fetchAllProducts() {
         dispatch(fetchProducts())
     },
+    fetchAllReviews() {
+        dispatch(fetchAllReviews())
+    }
 })
 
 const AllProductsContainer = connect(mapState, mapDispatch)(AllProducts)

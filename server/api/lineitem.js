@@ -15,7 +15,16 @@ router.get('/:userId', (req, res, next) =>
 })
 
 router.post('/', (req, res, next) => {
-        models.LineItem.create(req.body)
+        models.LineItem.create()
+        .then((res) => {
+                res.setProduct(req.body.productId)
+                res.setUser(req.body.userId)
+                res.setOrder(req.body.orderId)                
+                return res
+        })
+        .then((res) => {
+                res.setUser(req.body.userId)
+        })
                 .then(result => res.json(result))
                 .catch(next)
 })
