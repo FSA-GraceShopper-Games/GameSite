@@ -36,7 +36,7 @@ export function addProductToCart(productId) {
     })
     .then((res)=> res.data)
     .then((res) => {
-      dispatch(addProd(res))
+      return dispatch(addProd(res))
     })
   }
 }
@@ -54,15 +54,9 @@ export function emptyCart() {
 export function removeFromCart(id) {
   return function (dispatch) {
     return axios.put('/api/cart/', {id})
-    .then((res) => res.data)
-    .then((res) => {
-      console.log('WHAT AOBUT H HRE')
-      dispatch(fetchCart(res))
-    .then((prod)=> prod.data)
-    .then((prodInCart) => {
-      console.log('this ran', prodInCart)
-      dispatch(addProd(prodInCart))
-      history.push('/home')      
+      .then((res) => res.data)
+      .then((res) => {
+        dispatch(fetchCart(res))     
     })
   }
 }
