@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { NavLink, withRouter } from 'react-router-dom'
 import {connect} from 'react-redux'
-import {logout, filterByProducts, fetchGenre} from '../store'
+import {logout, filterByProducts, fetchGenre, isDirty} from '../store'
 
 class Navbar extends Component {
   constructor(props) {
@@ -64,6 +64,7 @@ class Navbar extends Component {
     const filteredByInput = this.props.filteredStuff.filter(product =>
       product.name.startsWith(inputValue));
     this.props.filterProducts(filteredByInput)
+    this.props.isDirty()
   }
 
   handleSelect(obj){
@@ -151,6 +152,9 @@ const mapDispatchToProps = dispatch => ({
   },
   fetchAllGenre: ()=>{
     dispatch(fetchGenre())
+  },
+  isDirty: ()=>{
+    dispatch(isDirty())
   }
 })
 
