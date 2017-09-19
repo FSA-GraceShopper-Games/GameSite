@@ -9,8 +9,9 @@ import reviews from './review'
 
 import filterProducts from './filterProducts'
 import genres  from './genre'
+import dirty from './dirty'
 
-const reducer = combineReducers({user, order, allProducts, filterProducts, cart, reviews, genres})
+const reducer = combineReducers({user, order, allProducts, filterProducts, cart, reviews, genres, dirty})
 
 
 const middleware = applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
@@ -24,5 +25,6 @@ export * from './AllProducts'
 export * from './filterProducts'
 export * from './genre'
 export * from './review'
+export * from  './dirty'
 
 
