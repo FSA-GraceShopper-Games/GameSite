@@ -41,6 +41,7 @@ class Cart extends Component {
         this.props.remove(e.target.value)
     }
     handleCheckout(e) {
+        e.preventDefault()
         var totalPrice = 0;
         for(var i = 0; i < this.props.cart.length; i++) {
             var item = this.props.cart[i];
@@ -53,7 +54,9 @@ class Cart extends Component {
         }
 
         var address= e.target.address.value
-        this.props.createOrder(products, address, totalPrice)
+        var email = e.target.email.value
+        console.log('userbro', this.props.user)
+        this.props.createOrder(products, address, totalPrice, email, this.props.user.id)
         this.props.emptyTheCart()
     }
 
@@ -141,6 +144,13 @@ class Cart extends Component {
                         label="Shipping Address?"
                         placeholder="Enter Address"
                     />
+                    <FieldGroup
+                        id="formControlsText"
+                        type="text"
+                        name="email"
+                        label="Email Address?"
+                        placeholder="Enter Email"
+                    />
                     <button type="submit" > CHECKOUT!!! </button>
 
                     </form>
@@ -156,15 +166,15 @@ class Cart extends Component {
 }
 
 const mapState = state => ({
-
+    user: state.user
 })
 
 const mapDispatch = dispatch => ({
     remove(id) {
         dispatch(removeFromCart(id))
     },
-    createOrder(products, address, totalPrice) {
-        dispatch(addOrder(products, address, totalPrice))
+    createOrder(products, address, totalPrice, email, userId) {
+        dispatch(addOrder(products, address, totalPrice, email, userId))
     },
     emptyTheCart() {
         dispatch(emptyCart())

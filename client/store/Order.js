@@ -29,9 +29,9 @@ export function fetchOrdersForUser(userId) {
     };
 }
 
-export function addOrder( products, address, totalPrice, userId) {
+export function addOrder( products, address, totalPrice, email, userId) {
   return function thunk(dispatch) {
-    axios.post('/api/order', {userId, address, totalPrice, products})
+    axios.post('/api/order', {userId, address, totalPrice, email, products})
     .then(() => {
     })
   }

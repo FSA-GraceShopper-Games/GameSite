@@ -65,8 +65,9 @@ router.get('/', (req, res, next) =>{
 })
 
 router.post('/', (req, res, next) =>
-{   models.Order.create({totalPrice: req.body.totalPrice, address: req.body.address})
+{   models.Order.create({totalPrice: req.body.totalPrice, address: req.body.address, email:req.body.email})
         .then((order) => {
+                order.setUser(req.body.userId)
                 req.body.products.forEach(function(productId) {
                         return models.LineItem.create()
                         .then(res=> {
