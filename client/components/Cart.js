@@ -18,6 +18,9 @@ function FieldGroup({ id, label, help, ...props }) {
     );
 }
 
+
+var totalPrice = 0
+
 class Cart extends Component {
 
     constructor(props) {
@@ -109,6 +112,7 @@ class Cart extends Component {
                     </Col>
                 </Row>
                 {
+
                     this.props.cart.map((item) => {
                         return this.renderCartItem(item)
                     })
