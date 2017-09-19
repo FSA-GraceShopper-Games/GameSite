@@ -15,15 +15,25 @@ class Sidebar extends Component {
     }
 
     render(){
+        const ranges =[[{min:0, max:1000}, 'all products'],[{min:0, max: 25}, 'under $25'], [{min:25, max: 50}, '$25 to $50'], [{min:50, max: 1000}, '$50 + ' ]]
             return (
             <div style={{marginTop: '60px'}} id="sidebar-wrapper">
             <ul className="sidebar-nav">
                 <li>
                     sort by price
                     <ul>
-                        <li onClick={this.filterByPrice.bind(this, {min:0, max: 25})}><a href="#">under $25</a></li>
-                        <li onClick={this.filterByPrice.bind(this, {min:25, max: 50})}><a href="#">$25 to $50</a></li>
-                        <li onClick={this.filterByPrice.bind(this, {min:50, max: 1000})}><a href="#">$50 + </a></li>
+                      {
+                        ranges.map((range,ind) => {
+                            return(
+                            <li 
+                              key={ind} 
+                              onClick={this.filterByPrice.bind(this, range[0])}>
+                              <a href="#">{range[1]}</a>
+                            </li>
+                            )
+                        })
+
+                      }
                     </ul>
                 </li>
                 <li>
@@ -59,5 +69,3 @@ const mapDispatchToProps = dispatch => {
 
 const SidebarContainer = connect(mapStateToProps, mapDispatchToProps)(Sidebar)
 export default SidebarContainer
-
-

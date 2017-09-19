@@ -73,10 +73,10 @@ class Navbar extends Component {
   }
 
   render() {
-    console.log(this.props.products)
+    // console.log(this.props.products)
     return (
       <nav className="navbar fixed-top navbar-expand-lg navbar-light bg-light">
-        <a className="navbar-brand" href="#">Ninja</a>
+        <NavLink to='/' className="navbar-brand" href="#">Ninja</NavLink>
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
