@@ -5,7 +5,7 @@ import {Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
 
-import {Main, Login, Signup, UserHome, WholePageSingle, AllProducts, SingleProductContainer, MyAccount} from './components'
+import {Main, Login, Signup, UserHome, WholePageSingle, AllProducts, SingleProductContainer, MyAccount, AddProduct, EditProduct} from './components'
 
 import {me} from './store'
 // import MyAccount from './MyAccount'
@@ -33,8 +33,13 @@ class Routes extends Component {
             <Route path='/signup' component={Signup} />
             <Route path='/singleproduct/:id' component={SingleProductContainer} />
             <Route path='/myaccount' component={MyAccount} />
-            <Route path='/' component={AllProducts} />
-
+            <Route exact path='/' component={AllProducts} />
+            <Route path="/product/add" render={
+              (routeProps) => <AddProduct history={routeProps.history} />
+            } />
+            <Route path='/products/:productId/edit' render={
+              (routeProps) => <EditProduct productId={routeProps.match.params.productId} history={routeProps.history} />
+            } />
             {
               isLoggedIn &&
                 <Switch>

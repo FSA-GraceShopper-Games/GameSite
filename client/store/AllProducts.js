@@ -48,7 +48,7 @@ export function postProduct(product, history) {
 
       dispatch(addProductAction);
 
-      history.push('/products');
+      history.push('/');
     };
     const error = console.error.bind(console);
 
@@ -63,7 +63,7 @@ export function updateProduct(productId, product, history) {
   return function thunk(dispatch, getState) {
     const toJson = response => response.data;
     const result = updatedProduct => {
-      const products = getState().products.map(product => (
+      const products = getState().allProducts.map(product => (
         product.id === updatedProduct.id ? updatedProduct : product
       ));
 
@@ -71,7 +71,7 @@ export function updateProduct(productId, product, history) {
 
       dispatch(gotProductsFromServerAction);
 
-      history.push('/products');
+      history.push('/');
     };
     const error = console.error.bind(console);
 
@@ -85,7 +85,7 @@ export function updateProduct(productId, product, history) {
 export function removeProduct(productId) {
   return function thunk(dispatch, getState) {
     const result = () => {
-      const products = getState().products.filter(product => {
+      const products = getState().allProducts.filter(product => {
         return product.id !== productId;
       });
 

@@ -11,3 +11,5 @@ export {default as WholePageSingle} from './WholePageSingle'
 export {default as SingleProduct} from './SingleProduct'
 export {default as SingleProductContainer} from './SingleProductContainer';
 export {default as MyAccount} from './MyAccount'
+export {default as AddProduct} from './AddProduct'
+export {default as EditProduct} from './EditProduct'

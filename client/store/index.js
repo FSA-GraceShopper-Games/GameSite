@@ -17,7 +17,7 @@ const store = createStore(reducer, middleware)
 export default store
 
 export * from './Cart'
-export * from './user';
-export * from './order';
-export * from './AllProducts';
-export * from './filterProducts';
+export * from './user'
+export * from './order'
+export * from './AllProducts'
+export * from './filterProducts'
