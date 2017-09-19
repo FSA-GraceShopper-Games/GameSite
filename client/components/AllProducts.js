@@ -26,7 +26,7 @@ class AllProducts extends Component {
         const style = {
             backgroundColor: '#4EB1BA'
         }
-        console.log('is this shit dirty??? ', this.props.dirty)
+        
         return (
 
                 <Col xs={12} md={12} style={style}>
@@ -50,7 +50,6 @@ class AllProducts extends Component {
 }
 
 const mapState = state => ({
-    // dirty: state.dirty,
     entirestate: state,
     products: state.filterProducts.length === 0 && !state.dirty? state.allProducts : state.filterProducts  //state.filterProducts
 })
