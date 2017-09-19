@@ -65,10 +65,7 @@ router.get('/', (req, res, next) =>{
 })
 
 router.post('/', (req, res, next) =>
-{   models.Order.create({date: req.body.date})
-        .then(res => {
-                return res
-        })
+{   models.Order.create({totalPrice: req.body.totalPrice, address: req.body.address})
         .then((order) => {
                 req.body.products.forEach(function(productId) {
                         return models.LineItem.create()

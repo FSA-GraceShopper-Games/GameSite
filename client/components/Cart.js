@@ -41,13 +41,19 @@ class Cart extends Component {
         this.props.remove(e.target.value)
     }
     handleCheckout(e) {
+        var totalPrice = 0;
+        for(var i = 0; i < this.props.cart.length; i++) {
+            var item = this.props.cart[i];
+            totalPrice +=  +item.price
+        }
         var products = []
         for (var i = 0; i < this.props.cart.length; i++) {
             var item = this.props.cart[i];
             products.push(item.id)
         }
+
         var address= e.target.address.value
-        this.props.createOrder(products, address)
+        this.props.createOrder(products, address, totalPrice)
         this.props.emptyTheCart()
     }
 
@@ -56,6 +62,7 @@ class Cart extends Component {
 
     }
     renderCartItem(product) {
+        
         return (
             <div  key={product.name}>
             <Row>
@@ -91,11 +98,12 @@ class Cart extends Component {
         )
     }
     render() {
-        var totalPrice = 0
+        var totalPrice = 0;
         for(var i = 0; i < this.props.cart.length; i++) {
             var item = this.props.cart[i];
-            totalPrice+=item.price
+            totalPrice +=  +item.price
         }
+        console.log('totalprice', totalPrice)
         
         console.log('render', this.props)
         const style = {
@@ -155,8 +163,8 @@ const mapDispatch = dispatch => ({
     remove(id) {
         dispatch(removeFromCart(id))
     },
-    createOrder(products, address) {
-        dispatch(addOrder(products, address))
+    createOrder(products, address, totalPrice) {
+        dispatch(addOrder(products, address, totalPrice))
     },
     emptyTheCart() {
         dispatch(emptyCart())
