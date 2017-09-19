@@ -68,6 +68,7 @@ import EditInfo from './EditInfo'
         )
     }
     renderCart() {
+        console.log(this.props.cart)
         return (
             <Row className="show-grid">
             <Col xs={12} md={12}>

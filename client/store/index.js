@@ -9,7 +9,7 @@ import order from './Order'
 
 import filterProducts from './filterProducts'
 
-const reducer = combineReducers({user, order, allProducts, filterProducts})
+const reducer = combineReducers({user, order, allProducts, cart, filterProducts})
 
 const middleware = applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
 const store = createStore(reducer, middleware)

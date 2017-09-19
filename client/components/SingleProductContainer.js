@@ -3,9 +3,8 @@ import axios from 'axios'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
 import {WholePageSingle} from '../components';
-import store, {getCart, addProductToCart} from '../store'
+import store, {fetchCart, addProductToCart} from '../store'
 
-console.log(' u got to single product page')
 class SingleProductContainer extends Component {
 
   constructor (props) {
@@ -20,7 +19,6 @@ class SingleProductContainer extends Component {
   }
 
   componentDidMount(){
-    console.log(this.props)
     axios.get(`/${this.props.match.params.id}`)
       .then(product => this.setState({product}))
       .catch(console.error)
@@ -37,12 +35,22 @@ class SingleProductContainer extends Component {
     var idparam = this.props.match.params.id
     const product = this.state.product
     const quantity = evt.target.value
-    this.props.addProductToCart(idparam, quantity);
-    // history.push('/')
+    var shouldIadd = true;
+
+    for(var i = 0; i < this.props.cart.length;i++) {
+      var item = this.props.cart[i];
+      if (item.id == idparam) {
+        shouldIadd = false;
+        break;
+      }
+    }
+    if (shouldIadd) {
+      this.props.addProductToCart(idparam, quantity);
+      this.props.getTheCart()
+    }
   }
 
   render () {
-    console.log('im here')
     return (
       <WholePageSingle direction={this.state.carDirection}
                       index={this.state.carIndex}
@@ -54,19 +62,14 @@ class SingleProductContainer extends Component {
 }
 
 const mapStateToProps = state => ({
+  cart: state.cart
 })
   
 const mapDispatchToProps = dispatch => ({
-  addProductToCart: (product) => dispatch(addProductToCart(product))
+  addProductToCart: (product) => dispatch(addProductToCart(product)),
+  getTheCart: () => {
+    dispatch(fetchCart())
+  }
 })
   
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SingleProductContainer))
-
-/* const mapDispatchToProps = dispatch => ({
-    someFunc: (someData) => dispatch(someFunc(someData))
-})
-const mapPropsToState = function(store){
-  return{
-    newState: store.students
-  }
-}; */
