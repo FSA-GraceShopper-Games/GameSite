@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { NavLink, withRouter } from 'react-router-dom'
 import {connect} from 'react-redux'
-import {logout, filterByProducts, fetchGenre, isDirty} from '../store'
+import {logout, filterByProducts, fetchGenre, isDirty, fetchProducts} from '../store'
 
 class Navbar extends Component {
   constructor(props) {
@@ -19,6 +19,11 @@ class Navbar extends Component {
 
   componentDidMount(){
     this.props.fetchAllGenre()
+    this.props.fetchProducts()
+    
+    // this.props.filterProducts(this.props.products)
+    // console.log('here!!!!!')
+    // console.log('something ', this.props.filteredStuff)
   }
 
   renderLoginSignup() {
@@ -75,7 +80,7 @@ class Navbar extends Component {
   }
 
   render() {
-   
+    console.log('DGHFDHGFDGHFD ', this.props.filteredStuff)
     return (
       <nav className="navbar fixed-top navbar-expand-lg navbar-light bg-light">
         <NavLink to='/' className="navbar-brand" href="#">Ninja</NavLink>
@@ -108,9 +113,9 @@ class Navbar extends Component {
                           onClick={() => this.handleSelect(genre.name)} 
                           style={{listStyle:"none"}} 
                           key={genre.id}>
-                          <a className="dropdown-item" href="#">
+                          <NavLink to='/' className="dropdown-item" href="#">
                             {genre.name}
-                          </a>
+                          </NavLink>
                         </li>
                         )
                     })
@@ -156,6 +161,9 @@ const mapDispatchToProps = dispatch => ({
   },
   isDirty: ()=>{
     dispatch(isDirty())
+  },
+  fetchProducts: () => {
+    dispatch(fetchProducts())
   }
 })
 

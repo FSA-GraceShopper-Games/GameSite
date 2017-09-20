@@ -9,7 +9,7 @@ import {Link} from 'react-router-dom'
 
 import SingleProd from './SingleProduct'
 
-import { fetchProducts, fetchAllReviews } from '../store'
+import { fetchProducts, fetchAllReviews, filterByProducts } from '../store'
 
 class AllProducts extends Component {
 
@@ -20,6 +20,7 @@ class AllProducts extends Component {
     componentDidMount() {
         this.props.fetchAllProducts();
         this.props.fetchAllReviews();
+        this.props.filterByProducts(this.props.allProducts)
     }
 
     render() {
@@ -51,6 +52,7 @@ class AllProducts extends Component {
 
 const mapState = state => ({
     entirestate: state,
+    allProducts: state.allProducts,
     products: state.filterProducts.length === 0 && !state.dirty? state.allProducts : state.filterProducts  //state.filterProducts
 })
 
@@ -62,7 +64,11 @@ const mapDispatch = dispatch => ({
     },
     fetchAllReviews() {
         dispatch(fetchAllReviews())
+    },
+    filterByProducts(products){
+        dispatch(filterByProducts(products))
     }
+    
 })
 
 const AllProductsContainer = connect(mapState, mapDispatch)(AllProducts)
