@@ -1,4 +1,6 @@
 import axios from 'axios';
+import history from '../history'
+
 
 // ACTION TYPES
 const GET_CART = 'GET_CART'
@@ -36,7 +38,8 @@ export function addProductToCart(productId) {
     })
     .then((res)=> res.data)
     .then((res) => {
-      return dispatch(addProd(res))
+      dispatch(addProd(res))
+      history.push('/myaccount')
     })
   }
 }
