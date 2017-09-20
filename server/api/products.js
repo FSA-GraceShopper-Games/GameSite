@@ -38,23 +38,13 @@ router.post('/', adminGatekeeper, (req, res, next) =>
         .catch(next)
 })
 
-function selfOrAdminGatekeeper(req, res, next) {
-        if (!req.user) {
-          res.sendStatus(401);
-        } else if (!req.user.isAdmin && req.user.id !== req.params.id) {
-          res.sendStatus(403);
-        } else {
-          next();
-        }
-}
-
-router.put('/:id', selfOrAdminGatekeeper, (req, res, next) =>
+router.put('/:id', adminGatekeeper, (req, res, next) =>
 {   models.Product.findOne({where: {id: req.params.id}})
         .then(result => result.update(req.body, {returning: true}))
         .then(updatedProd => res.json(updatedProd[1]))
 })
 
-router.delete('/:id', selfOrAdminGatekeeper, (req,res,next) =>
+router.delete('/:id', adminGatekeeper, (req,res,next) =>
 {   models.Product.findOne({where: {id : req.params.id}})
         .then(result => result.destroy())
         .then(res.json('success!!!!'))

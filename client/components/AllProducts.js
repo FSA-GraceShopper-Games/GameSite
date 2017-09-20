@@ -4,11 +4,7 @@ import {connect} from 'react-redux';
 // import {Sidebar} from './Sidebar'
 import {Grid, Row, Col, FormControl, Container} from 'react-bootstrap';
 import {Link} from 'react-router-dom'
-
-
-
 import SingleProd from './SingleProduct'
-
 import { fetchProducts, fetchAllReviews } from '../store'
 
 class AllProducts extends Component {
@@ -27,12 +23,22 @@ class AllProducts extends Component {
             backgroundColor: '#4EB1BA'
         }
         
+        const {deleteProductError} = this.props
+
         return (
 
                 <Col xs={12} md={12} style={style}>
                 <h1>
                     Search Results:
                 </h1>
+                {
+                    deleteProductError ? (
+                    <div className="alert alert-warning" role="alert">
+                      Sorry, only admin can delete a product!
+                    </div>
+                  ) :
+                  null
+                }
                 <div className="d-flex justify-content-end" style={{padding: '0.75rem'}}>
                     <Link className="btn btn-info p-2" to={'/product/add'} role="button">Add A Product</Link>
                 </div>
@@ -50,13 +56,12 @@ class AllProducts extends Component {
 }
 
 const mapState = state => ({
-    entirestate: state,
+
+    products: state.filterProducts.length === 0 ? state.allProducts : state.filterProducts,
+    deleteProductError: state.deleteProductError,
     reviews: state.reviews,
     products: state.filterProducts.length === 0 && !state.dirty? state.allProducts : state.filterProducts  //state.filterProducts
-
 })
-
-
 
 const mapDispatch = dispatch => ({
     fetchAllProducts() {
@@ -70,5 +75,3 @@ const mapDispatch = dispatch => ({
 const AllProductsContainer = connect(mapState, mapDispatch)(AllProducts)
 
 export default AllProductsContainer
-
-
