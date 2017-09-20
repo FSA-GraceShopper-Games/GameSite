@@ -1,10 +1,11 @@
 'use strict';
 
 import React, {Component} from 'react';
+import {connect} from 'react-redux'
 import store from '../store';
 import {updateProduct} from '../store';
 
-export default class EditProduct extends Component {
+class EditProduct extends Component {
   constructor() {
     super();
 
@@ -64,8 +65,18 @@ export default class EditProduct extends Component {
   }
 
   render() {
+    const {editProductError} = this.props
+
     return (
       <form className="color" onSubmit={this.handleSubmit}>
+      {
+        editProductError ? (
+          <div className="alert alert-warning" role="alert">
+            Sorry, only admin can edit a product!
+          </div>
+        ) :
+        null
+      }
         <fieldset>
           <legend>Edit A Product</legend>
           <div className="form-group">
@@ -90,3 +101,11 @@ export default class EditProduct extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  editProductError: state.editProductError
+})
+
+const EditProductContainer = connect(mapStateToProps, null)(EditProduct)
+
+export default EditProductContainer
