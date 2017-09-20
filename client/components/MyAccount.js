@@ -37,15 +37,16 @@ import EditInfo from './EditInfo'
 
     componentDidMount() {
         this.props.getTheCart()
-        this.props.fetchOrders(3)
+        this.props.fetchOrders(this.props.user.id)
     }
 
 
     renderOrderHistory() {
+        console.log('ORDERS', this.props.orders)
         function renderSingleOrder(order) {
             return (<div style={{borderTop: '5px solid blue'}}key={order.id}>
                 <h3>Order progress: {order.progress}</h3>
-                <h3>Date you ordered: {order.date.slice(0,10)}</h3>
+                {/* <h3>Date you ordered: {order.date.slice(0,10)}</h3> */}
                 <h3>These are the products you ordered: </h3>
                 {
                     order.lineItems.map((lineItem) => {
@@ -230,7 +231,8 @@ import EditInfo from './EditInfo'
 
 const mapState = state => ({
     orders: state.order,
-    cart: state.cart
+    cart: state.cart,
+    user: state.user
 })
 
 const mapDispatch = dispatch => ({
