@@ -92,10 +92,6 @@ export default class AllProducts extends Component {
             </Grid>
             <br/>
             </div>
-
         )
     }
 }
-//  // <Checkbox inline onChange={this.handleClick}>
-                        //     Used
-                        // </Checkbox>

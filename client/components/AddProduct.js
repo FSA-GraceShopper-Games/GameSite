@@ -1,10 +1,11 @@
 'use strict';
 
 import React, {Component} from 'react';
+import {connect} from 'react-redux'
 import store from '../store';
 import {postProduct} from '../store';
 
-export default class AddProduct extends Component {
+class AddProduct extends Component {
   constructor() {
     super();
 
@@ -20,10 +21,6 @@ export default class AddProduct extends Component {
     this.handleChange3 = this.handleChange3.bind(this);
     this.handleChange4 = this.handleChange4.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  componentDidMount() {
-
   }
 
   handleChange1(event) {
@@ -52,6 +49,7 @@ export default class AddProduct extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
+
     const history = this.props.history
     const name = this.state.name;
     const description = this.state.description;
@@ -62,8 +60,18 @@ export default class AddProduct extends Component {
   }
 
   render() {
+    const {addProductError} = this.props
+
     return (
       <form className="color" onSubmit={this.handleSubmit}>
+      {
+        addProductError ? (
+          <div className="alert alert-warning" role="alert">
+            Sorry, only admin can add a product!
+          </div>
+        ) :
+        null
+      }
         <fieldset>
           <legend>Add A Product</legend>
           <div className="form-group">
@@ -88,3 +96,11 @@ export default class AddProduct extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  addProductError: state.addProductError
+})
+
+const AddProductContainer = connect(mapStateToProps, null)(AddProduct)
+
+export default AddProductContainer

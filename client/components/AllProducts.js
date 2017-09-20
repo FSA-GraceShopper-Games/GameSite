@@ -82,12 +82,21 @@ class AllProducts extends Component {
         const style = {
             backgroundColor: '#4EB1BA'
         }
+        const {deleteProductError} = this.props
         return (
 
                 <Col xs={12} md={12} style={style}>
                 <h1>
                     Search Results:
                 </h1>
+                {
+                    deleteProductError ? (
+                    <div className="alert alert-warning" role="alert">
+                      Sorry, only admin can delete a product!
+                    </div>
+                  ) :
+                  null
+                }
                 <div className="d-flex justify-content-end" style={{padding: '0.75rem'}}>
                     <Link className="btn btn-info p-2" to={'/product/add'} role="button">Add A Product</Link>
                 </div>
@@ -106,7 +115,8 @@ class AllProducts extends Component {
 
 const mapState = state => ({
     entirestate: state,
-    products: state.filterProducts.length === 0 ? state.allProducts : state.filterProducts
+    products: state.filterProducts.length === 0 ? state.allProducts : state.filterProducts,
+    deleteProductError: state.deleteProductError
 })
 
 const mapDispatch = dispatch => ({

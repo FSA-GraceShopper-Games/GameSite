@@ -1,9 +1,11 @@
 import axios from 'axios';
+import {gotAddProductErrorFromServer} from './addProductError';
+import {gotEditProductErrorFromServer} from './editProductError';
+import {gotDeleteProductErrorFromServer} from './deleteProductError';
 
 // ACTION TYPES
 const GOT_PRODUCTS_FROM_SERVER = 'GOT_PRODUCTS_FROM_SERVER';
 const ADD_PRODUCT = 'ADD_PRODUCT';
-
 
 // ACTION CREATORS
 export function gotProductsFromServer(products) {
@@ -19,9 +21,6 @@ export function addProduct(product) {
     product
   };
 }
-
-
-
 
 // THUNK CREATORS
 export function fetchProducts() {
@@ -50,7 +49,11 @@ export function postProduct(product, history) {
 
       history.push('/');
     };
-    const error = console.error.bind(console);
+    const error = error => {
+      const gotAddProductErrorFromServerAction = gotAddProductErrorFromServer(error);
+
+      dispatch(gotAddProductErrorFromServerAction);
+    }
 
     return axios.post('/api/products', product)
     .then(toJson)
@@ -73,7 +76,11 @@ export function updateProduct(productId, product, history) {
 
       history.push('/');
     };
-    const error = console.error.bind(console);
+    const error = error => {
+      const gotEditProductErrorFromServerAction = gotEditProductErrorFromServer(error);
+
+      dispatch(gotEditProductErrorFromServerAction);
+    }
 
     return axios.put(`/api/products/${productId}`, product)
     .then(toJson)
@@ -93,7 +100,11 @@ export function removeProduct(productId) {
 
       dispatch(gotProductsFromServerAction);
     };
-    const error = console.error.bind(console);
+    const error = error => {
+      const gotDeleteProductErrorFromServerAction = gotDeleteProductErrorFromServer(error);
+
+      dispatch(gotDeleteProductErrorFromServerAction);
+    }
 
     return axios.delete(`/api/products/${productId}`)
     .then(result)

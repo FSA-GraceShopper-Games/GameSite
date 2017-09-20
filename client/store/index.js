@@ -8,8 +8,11 @@ import cart from './Cart'
 import order from './Order'
 
 import filterProducts from './filterProducts'
+import addProductError from './addProductError'
+import editProductError from './editProductError'
+import deleteProductError from './deleteProductError'
 
-const reducer = combineReducers({user, order, allProducts, filterProducts})
+const reducer = combineReducers({user, order, allProducts, filterProducts, addProductError, editProductError, deleteProductError})
 
 const middleware = applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
 const store = createStore(reducer, middleware)
