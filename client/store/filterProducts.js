@@ -14,6 +14,6 @@ export default function reducer(state = [], action) {
     case FILTER_PRODUCT:
     return action.products
     default:
-      return state;
+      return state
   }
 }

@@ -22,13 +22,21 @@ export function fetchOrdersForUser(userId) {
         dispatch(action);
       };
       const error = console.error.bind(console);
-      console.log('rignrignrgingingiUSERIDIDDDDDDDDDD', userId)
       return axios.get('/api/order/user/' + userId)
       .then(toJson)
       .then(result)
       .catch(error);
     };
 }
+
+export function addOrder( products, address, totalPrice, email, userId) {
+  return function thunk(dispatch) {
+    axios.post('/api/order', {userId, address, totalPrice, email, products})
+    .then(() => {
+    })
+  }
+}
+
 
 // REDUCER
 export default function reducer(state = [], action) {

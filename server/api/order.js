@@ -4,6 +4,32 @@ const models = require('../db/models')
 const LineItem = models.LineItem
 const Product = models.Product
 const User = models.User
+var nodemailer = require('nodemailer');
+
+// var transporter = nodemailer.createTransport({
+//   service: 'gmail',
+//   auth: {
+//     user: 'youremail@gmail.com',
+//     pass: 'yourpassword'
+//   }
+// });
+
+// var mailOptions = {
+//   from: 'youremail@gmail.com',
+//   to: 'myfriend@yahoo.com',
+//   subject: 'Sending Email using Node.js',
+//   text: 'That was easy!'
+// };
+
+// transporter.sendMail(mailOptions, function(error, info){
+//   if (error) {
+//     console.log(error);
+//   } else {
+//     console.log('Email sent: ' + info.response);
+//   }
+// });
+
+
 router.get('/', (req, res, next) =>
 {   models.Order.findAll()
         .then(result => res.json(result))
@@ -39,7 +65,21 @@ router.get('/', (req, res, next) =>{
 })
 
 router.post('/', (req, res, next) =>
-{   models.Order.create(req.body)
+{   models.Order.create({totalPrice: req.body.totalPrice, address: req.body.address, email:req.body.email})
+        .then((order) => {
+                order.setUser(req.body.userId)
+                req.body.products.forEach(function(productId) {
+                        return models.LineItem.create()
+                        .then(res=> {
+                                res.setProduct(productId)
+                                res.setOrder(order.id)
+                        })
+                })
+                
+        })
+        .then((res) => {
+                
+        })
         .then(result => res.json(result))
         .catch(next)
 })
