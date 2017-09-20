@@ -51,7 +51,7 @@ class AllProducts extends Component {
 
 const mapState = state => ({
     entirestate: state,
-    reviews: state.reviews
+    reviews: state.reviews,
     products: state.filterProducts.length === 0 && !state.dirty? state.allProducts : state.filterProducts  //state.filterProducts
 
 })
